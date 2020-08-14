@@ -1,0 +1,87 @@
+.login {
+  background: url(../../static/img/loginBg.jpg) no-repeat center;
+  background-size: cover;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .logo {
+    background: url(../../static/img/loginLogin.png) no-repeat center;
+    background-size: contain;
+    width: 25vw;
+    height: 10vh;
+    margin: 10% auto 2%;
+  }
+
+  .login-input {
+    font-size: 14px;
+  }
+
+  .box-card {
+    border-style: none;
+    border-radius: 0;
+  }
+
+  .login-card {
+    position: relative;
+    width: 400px;
+    height: 310px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.1);
+
+    .user-login {
+      color: #fff;
+      font-size: 20px;
+      letter-spacing: 10px;
+      margin-bottom: 10px;
+    }
+
+    .form {
+      text-align: left;
+      left: 0;
+      top: 0;
+      z-index: 2;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 40px;
+      height: 100%;
+
+    }
+
+    .alert {
+      left: 36px;
+      bottom: 10px;
+      width: 80%;
+    }
+
+    .el-input__prefix {
+      left: 10px;
+    }
+
+    .login-button {
+      width: 80%;
+      background: linear-gradient(top left, #449eea, #69e4d0);
+      border: none;
+      .login-text {
+        letter-spacing: 12px;
+        font-size: 16px;
+      }
+    }
+
+  }
+
+  .support {
+    position: fixed;
+    bottom: 2vh;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-size: 12px;
+    text-align: center;
+    color: #666;
+  }
+}

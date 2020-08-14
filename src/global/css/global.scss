@@ -1,0 +1,84 @@
+.tool-bar {
+  display: flex;
+  height: 30px;
+  line-height: 30px;
+  align-items: center;
+  margin-bottom: 0.8vh;
+}
+
+.tab-tool-bar {
+  margin-top: -8px;
+  margin-bottom: 7px;
+}
+
+.search-input {
+  margin-left: 10px;
+}
+
+.small_dialog {
+  .el-dialog__body {
+    padding: 20px 10px;
+  }
+
+  .el-dialog__header {
+    margin: 0;
+    padding: 15px 20px 10px;
+    border-bottom: 1px solid #DCDFE6;
+
+    .el-dialog__title {
+      line-height: 24px;
+      font-size: 18px;
+      color: #303133;
+    }
+  }
+}
+
+.custom-dialog-title {
+  font-size: 18px;
+}
+
+.hand-point {
+  cursor: pointer;
+}
+
+.action-button {
+  padding: 5px !important;
+}
+
+.base-form {
+  text-align: left;
+  margin-right: 2vh;
+  .el-form-item__label {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    font-weight: normal;
+  }
+  .complex-form {
+    margin-bottom: 0 !important;
+  }
+}
+
+.custom-color {
+  .main-text {
+    color: #4C4C4C;
+  }
+
+  .info {
+    color: #909399;
+  }
+
+  .primary {
+    color: #2ebaae;
+  }
+
+  .success {
+    color: #409EFF;
+  }
+
+  .warning {
+    color: #E6A23C;
+  }
+
+  .danger {
+    color: #F56C6C;
+  }
+}
