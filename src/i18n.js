@@ -9,7 +9,7 @@ import cn from './locales/cn'
 // import en from '../src/locales/cn/en'
 // import tw from '../src/locales/cn/tw'
 
-Vue.prototype.cn = cn
+Vue.prototype.$cn = cn
 // Vue.prototype.en = en
 // Vue.prototype.tw = tw
 

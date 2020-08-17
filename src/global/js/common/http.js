@@ -6,8 +6,6 @@ import { errorResponse, responseRoute } from './message'
 import deepCopy from '../function/deepCopy'
 
 export const api = {
-  // local: 'http://api.admin.crm.com',
-  // master: 'https://apiadmin.kgjsoft.com'
   local: 'http://api.admin.keguanjia.com',
   master: 'https://apiadmin.softkgj.com'
 }
@@ -18,7 +16,7 @@ export const api = {
  */
 export const getApiUrl = (request) => {
   let host = document.domain
-  if (host === 'localhost' || host === 'localhost:8080' || host === 'localhost:8081' || host === '192.168.66.134') {
+  if (host === 'localhost' || host === 'localhost:8080') {
     // return request.local
     return request.master
   } else {
@@ -34,6 +32,8 @@ export const getApiUrl = (request) => {
 
 axios.defaults.timeout = 60000 // 配置响应时间 单位 ms
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8' // 请求头
+// axios.defaults.headers.post['Content-Type'] = 'text/plain' // 跨域关键所在，设置这个就不需要用qs做参数格式转换
+
 
 const saveLoad = (url) => {
   let base = ['Index', 'Create', 'Update', 'Info', 'Status']
@@ -53,6 +53,7 @@ const saveLoad = (url) => {
 axios.interceptors.request.use((config) => {
   // POST 请求之前，执行的操作
   nprogress.start()
+  // console.log(config)
   saveLoad(config.url)
   if (config.method === 'post') {
     config.headers.post['Accept'] = 'application/json'
@@ -89,6 +90,7 @@ export const apiPost = (url, params = {}, base) => {
   return new Promise((resolve, reject) => {
     if (!base) base = deepCopy(api)
     axios.defaults.baseURL = getApiUrl(base)
+    // axios.defaults.baseURL = process.env.VUE_APP_BASE_API
     axios.post(url, params).then(response => {
       resolve(response)
     }, err => {
@@ -109,8 +111,8 @@ export const checkCode = (code) => {
 }
 
 export default {
-  api,
-  getApiUrl,
   apiPost,
-  checkCode
+  checkCode,
+  getApiUrl,
+  api,
 }

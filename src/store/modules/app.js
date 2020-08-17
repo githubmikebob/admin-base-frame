@@ -72,7 +72,7 @@ const actions = {
   toggleSideBar({ commit }) {
     commit('TOGGLE_SIDEBAR')
   },
-  closeSideBar({commit}, {withoutAnimation}) {
+  closeSideBar({ commit }, { withoutAnimation }) {
     commit('CLOSE_SIDEBAR', withoutAnimation)
   },
   set_size({ commit }, size) {
