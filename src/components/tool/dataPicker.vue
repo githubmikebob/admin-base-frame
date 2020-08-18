@@ -1,6 +1,6 @@
 <template>
   <div style="display: inline-block">
-    <span v-if="show_text" class="tool-text">{{transform(text)}}</span>
+    <span v-if="show_text" class="tool-text">{{$transform(text)}}</span>
     <el-date-picker
           :disabled="disabled"
           v-model="value"

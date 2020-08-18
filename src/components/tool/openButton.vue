@@ -1,6 +1,6 @@
 <template>
   <el-button :size="size" :type="type" @click="open" class="open-button" plain v-if="checkRule(rules)">
-    <i :class="icon" class="fas open-icon" />{{transform(name)}}
+    <i :class="icon" class="fas open-icon" />{{$transform(name)}}
   </el-button>
 </template>
 

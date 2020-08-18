@@ -25,7 +25,7 @@
         </div>
       </el-form-item>
     </el-form>
-    <submit-button :saving="requesting" @close="close" @save="vm._dialog.save(vm)"/>
+    <submit-button :saving="requesting" @close="close" @save="vm.$dialog.save(vm)"/>
   </el-dialog>
 </template>
 
@@ -48,7 +48,7 @@ export default {
     [CheckboxGroup.name]: CheckboxGroup,
   },
   created() {
-    this.rule = verify('shop', this.deepCopy(this.form))
+    this.rule = verify('shop', this.$deepCopy(this.form))
   },
   data() {
     return {
@@ -67,8 +67,8 @@ export default {
   },
   computed: {
     menus() {
-      let rules = this.deepCopy(this.auth_rules)   // 所有权限
-      let rule = this.deepCopy(this.form.menus)    // 选中权限
+      let rules = this.$deepCopy(this.auth_rules)   // 所有权限
+      let rule = this.$deepCopy(this.form.menus)    // 选中权限
       for (let k in rules) {
         if (rules.hasOwnProperty(k)) {
           let check = true
@@ -87,7 +87,7 @@ export default {
   methods: {
     open() {
       this.$nextTick(() => {
-        this._dialog.title(this, 'shop.shopPower')
+        this.$dialog.title(this, 'shop.shopPower')
         this.getRules()
       })
     },
@@ -96,7 +96,7 @@ export default {
       this.auth_rules = []
     },
     all(bool, menus) {
-      let rules = this.deepCopy(this.form.menus)
+      let rules = this.$deepCopy(this.form.menus)
       for (let v of menus) {
         if (!bool) {
           for (let k in rules) {

@@ -59,7 +59,7 @@ export default {
     },
     logout() {
       let that = this
-      let user = this.storage.get('user')
+      let user = this.$storage.get('user')
       let loading = load('login.exiting')
       apiPost('/User/Logout', { username: user.username, fd: this.socket.fd }).then((res) => {
         if (res.code === 200) {

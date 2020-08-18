@@ -4,13 +4,6 @@ import VueRouter from 'vue-router'
 import layout from '../layout/layout'
 /* Router Modules */
 import customerRouter from './modules/customer'
-import weChatRouter from './modules/weChat'
-import smsRouter from './modules/sms'
-import appRouter from './modules/app'
-import publicRouter from './modules/public'
-import parameterRouter from './modules/parameter'
-import serverRouter from './modules/server'
-import systemRouter from './modules/system'
 
 Vue.use(VueRouter)
 
@@ -20,20 +13,6 @@ Vue.use(VueRouter)
  * all roles can be accessed
  */
 export const baseRoutes = [
-  {
-    path: '/Redirect',
-    name: 'Redirect',
-    meta: { title: 'Redirect', icon: 'fas fa-home' },
-    hidden: true,
-    component: layout,
-    children: [
-      {
-        path: '/redirect/:path*',
-        meta: { title: 'Redirect', icon: 'fas fa-home' }
-        // component: () => import('@/views/redirect/redirect.vue'),
-      }
-    ]
-  },
   {
     path: '/',
     name: 'Login',
@@ -63,13 +42,6 @@ export const baseRoutes = [
  */
 export const asyncRoutes = [
   customerRouter,
-  weChatRouter,
-  smsRouter,
-  publicRouter,
-  appRouter,
-  parameterRouter,
-  serverRouter,
-  systemRouter
 ]
 
 const createRouter = () => new VueRouter({

@@ -47,7 +47,7 @@
         <el-input :disabled="requesting" v-model="form.remark"/>
       </el-form-item>
     </el-form>
-    <submit-button :saving="requesting" @close="close" @save="vm._dialog.save(vm)"/>
+    <submit-button :saving="requesting" @close="close" @save="vm.$dialog.save(vm)"/>
   </el-dialog>
 </template>
 
@@ -70,7 +70,7 @@ export default {
     dataPicker
   },
   created() {
-    this.rule = verify('shop', this.deepCopy(this.form))
+    this.rule = verify('shop', this.$deepCopy(this.form))
   },
   data() {
     return {
@@ -98,7 +98,7 @@ export default {
   methods: {
     open() {
       this.$nextTick(() => {
-        this._dialog.title(this, 'shop.shop')
+        this.$dialog.title(this, 'shop.shop')
         // 获取数据
         let selectDistrict = this.$refs.selectDistrict
         selectDistrict.getDistrictCascade()

@@ -1,6 +1,6 @@
 <template>
   <el-alert
-    :title="transform(alert.content)"
+    :title="$transform(alert.content)"
     :type="alert.type"
     @close="close"
     center

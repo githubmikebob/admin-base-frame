@@ -24,7 +24,7 @@ export default {
   name: 'radioGroup',
   created() {
     this.$nextTick(() => {
-      this.value = this.deepCopy(this.type)
+      this.value = this.$deepCopy(this.type)
     })
   },
   components: {
@@ -47,7 +47,7 @@ export default {
     },
     pool() {
       if (this.$te(this.target)) {
-        let pool = this.deepCopy(this.$t(this.target))
+        let pool = this.$deepCopy(this.$t(this.target))
         if (pool.hasOwnProperty('color')) delete pool['color']
         if (pool.hasOwnProperty(-1)) {
           delete pool[-1]
@@ -85,7 +85,7 @@ export default {
   },
   watch: {
     type(val) {
-      this.value = this.deepCopy(val)
+      this.value = this.$deepCopy(val)
     }
   }
 }

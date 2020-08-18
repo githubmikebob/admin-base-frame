@@ -69,7 +69,7 @@ export default {
     selectList
   },
   created() {
-    this.rule = verify('company', this.deepCopy(this.form))
+    this.rule = verify('company', this.$deepCopy(this.form))
   },
   data() {
     return {
@@ -98,7 +98,7 @@ export default {
   methods: {
     open() {
       this.$nextTick(() => {
-        this._dialog.title(this, 'company.company')
+        this.$dialog.title(this, 'company.company')
         // 获取数据
         let selectDistrict = this.$refs.selectDistrict
         selectDistrict.getDistrictCascade()

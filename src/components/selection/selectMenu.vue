@@ -51,7 +51,7 @@ export default {
       this.$emit('update:menu_id', id)
     },
     search(keyword) {
-      let pool = this.deepCopy(this.pool)
+      let pool = this.$deepCopy(this.pool)
       if (keyword) {
         this.list = pool.filter((item) => {
           return item.name.indexOf(keyword) || item.letter.indexOf(keyword.toUpperCase()) || item.spell.indexOf(keyword.toLowerCase()) || item.short.indexOf(keyword.toUpperCase())

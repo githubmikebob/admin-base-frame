@@ -57,11 +57,11 @@ export default {
   },
   methods: {
     init() {
-      this.id = this.deepCopy(this.select_id)
+      this.id = this.$deepCopy(this.select_id)
     },
     generateList(keyword) {
       let that = this
-      let data = that.deepCopy(that.pool)
+      let data = that.$deepCopy(that.pool)
       if (!keyword) keyword = ''
       keyword = keyword.trim()
       that.list = data.filter((item) => ((item.name && item.name.indexOf(keyword.toUpperCase())) ||
@@ -72,7 +72,7 @@ export default {
     set() {
       let that = this
       this.$emit('update:select_id', that.id)
-      that.$emit('choose', that.deepCopy(that.id), that.deepCopy(that.pool))
+      that.$emit('choose', that.$deepCopy(that.id), that.$deepCopy(that.pool))
     },
     clear() {
       this.id = ''
@@ -84,7 +84,7 @@ export default {
   },
   watch: {
     select_id(val) {
-      this.id = this.deepCopy(val)
+      this.id = this.$deepCopy(val)
     }
   }
 }

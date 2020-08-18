@@ -66,7 +66,7 @@ export default {
       },
       list: [],
       page: 1,
-      size: this.autoTableHeight(0, 37, 37, 0, 1),
+      size: this.$autoTableHeight(0, 37, 37, 0, 1),
       total: 0,
       columns: [
         { type: 'index' },

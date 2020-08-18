@@ -8,7 +8,7 @@
           top="8vh"
           width="880">
     <div class="tool-bar">
-      <open-button @open="vm._dialog.open(vm)" />
+      <open-button @open="vm.$dialog.open(vm)" />
       <search-input ref="searchInput" :keyword.sync="keyword.keyword.value" @search="search" placeholder="shop"
                     width="30%"/>
       <search-button @search="search"/>
@@ -38,7 +38,7 @@ export default {
     add
   },
   created() {
-    // this.rule = verify('company', this.deepCopy(this.form))
+    // this.rule = verify('company', this.$deepCopy(this.form))
   },
   data() {
     return {
@@ -74,7 +74,7 @@ export default {
     search,
     actions(type, row) {
       if (type === 'edit') {
-        this._dialog.initInfo(this.$refs.add, row.id)
+        this.$dialog.initInfo(this.$refs.add, row.id)
       }
     },
     open() {

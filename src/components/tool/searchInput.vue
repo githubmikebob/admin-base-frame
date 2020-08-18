@@ -1,11 +1,11 @@
 <template>
   <el-tooltip
-    :content="transform('search.' + placeholder)"
+    :content="$transform('search.' + placeholder)"
     :placement="placement"
     :enterable="enterable"
     :effect="effect">
       <el-input
-        :placeholder="transform('search.' + placeholder)"
+        :placeholder="$transform('search.' + placeholder)"
         :size="size"
         :clearable="clearable"
         :style="'width: ' + width + ';margin-left: ' + margin_left"

@@ -2,15 +2,15 @@
   <div class="login">
     <div class="logo"></div>
     <el-card class="box-card login-card" id="login_card">
-      <div class="user-login">{{transform('login.user_login')}}</div>
+      <div class="user-login">{{$transform('login.user_login')}}</div>
       <el-form :model="form" :rules="rule" class="form" label-width="0px" ref="form">
         <el-form-item prop="username">
-          <el-input v-model="form.username" :disabled="requesting" autofocus :placeholder="transform('login.placeholder.account')" class="login-input" @keyup.enter.native="login(vm, 'form', form, url, vm.language)">
+          <el-input v-model="form.username" :disabled="requesting" autofocus :placeholder="$transform('login.placeholder.account')" class="login-input" @keyup.enter.native="login(vm, 'form', form, url, vm.language)">
             <i class="el-input__icon el-icon-user" slot="prefix"></i>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="form.password" :disabled="requesting" :placeholder="transform('login.placeholder.password')" class="login-input" type="password" @keyup.enter.native="login(vm, 'form', form, url, vm.language)">
+          <el-input v-model="form.password" :disabled="requesting" :placeholder="$transform('login.placeholder.password')" class="login-input" type="password" @keyup.enter.native="login(vm, 'form', form, url, vm.language)">
             <i class="el-input__icon fas fa-unlock-alt" slot="prefix"></i>
           </el-input>
         </el-form-item>
@@ -32,12 +32,12 @@ import requesting from '../../global/js/mixin/requesting'
 import alert from '../../components/tool/alert'
 import { login } from './login'
 import verify from '../../global/js/common/verify'
-import deepCopy from '../../global/js/function/deepCopy'
+// import deepCopy from '../../global/js/function/deepCopy'
 
 export default {
   name: 'login',
   created() {
-    this.rule = verify('user', deepCopy(this.form))
+    this.rule = verify('user', this.$deepCopy(this.form))
   },
   mixins: [requesting],
   components: {

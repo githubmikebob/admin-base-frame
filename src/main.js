@@ -12,13 +12,7 @@ import './global/js/global.js' // 引入全局扩展方法
 
 import './components/components' // // 引入全局注册组件
 
-// 引入全局扩展方法
-import extend from './global/js/function/extend'
-
 Vue.config.productionTip = false
-
-// 全局扩展方法
-Vue.prototype.extend = extend
 
 new Vue({
   router,

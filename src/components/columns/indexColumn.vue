@@ -3,7 +3,7 @@
     :align="column.align"
     :fixed="column.fixed"
     :index="formatIndex"
-    :label="transform(column.name)"
+    :label="$transform(column.name)"
     :width="width"
     show-overflow-tooltip
     type="index"
@@ -16,9 +16,9 @@ export default {
   name: 'indexColumn',
   computed: {
     column() {
-      let a = this.deepCopy(this.default_column)
-      let b = this.deepCopy(this.prop_column)
-      return this.extend(a, b)
+      let a = this.$deepCopy(this.default_column)
+      let b = this.$deepCopy(this.prop_column)
+      return this.$extend(a, b)
     }
   },
   props: {

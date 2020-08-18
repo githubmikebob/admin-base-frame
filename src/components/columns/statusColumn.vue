@@ -31,9 +31,9 @@ export default {
   },
   computed: {
     column() {
-      let a = this.deepCopy(this.default_column)
-      let b = this.deepCopy(this.prop_column)
-      return this.extend(a, b)
+      let a = this.$deepCopy(this.default_column)
+      let b = this.$deepCopy(this.prop_column)
+      return this.$extend(a, b)
     }
   },
   props: {

@@ -8,12 +8,6 @@ const customerRouter = {
   meta: { title: '客户管理', icon: 'fas fa-users', auth: 'Customer' },
   children: [
     {
-      path: '/Customer',
-      name: 'Customer',
-      meta: { title: '客户管理', icon: 'fas fa-key', auth: 'Customer' }
-      // component: () => import(/* webpackChunkName: "about" */ '@/views/Customers/Customers.vue'),
-    },
-    {
       path: '/Company',
       name: 'Company',
       meta: { title: '公司列表', icon: 'fas fa-building', auth: 'Company' },
@@ -30,12 +24,6 @@ const customerRouter = {
       name: 'Customers',
       meta: { title: '账号列表', icon: 'fas fa-users', auth: 'Customers' },
       component: () => import(/* webpackChunkName: "about" */ '@/views/customers/index.vue'),
-    },
-    {
-      path: '/Certs',
-      name: 'Certs',
-      meta: { title: 'Certs', icon: 'fas fa-id-card' }
-      // component: () => import(/* webpackChunkName: "about" */ '@/views/certs/certs.vue'),
     },
     {
       path: '/Menu',

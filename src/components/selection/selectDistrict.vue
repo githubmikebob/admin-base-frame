@@ -53,7 +53,7 @@ export default {
     },
     getDistrictCascade() {
       let that = this
-      let cascade = this.storage.get('Cascade')
+      let cascade = this.$storage.get('Cascade')
       if (!cascade) {
         apiPost('/District/Cascade', {}).then((res) => {
           if (res.code === 200) {

@@ -3,7 +3,7 @@
       :align="column.align"
       :fixed="column.fixed"
       :header-align="column.head_align"
-      :label="transform(column.name)"
+      :label="$transform(column.name)"
       :width="column.width"
       show-overflow-tooltip
   >
@@ -38,9 +38,9 @@ export default {
   },
   computed: {
     column() {
-      let a = this.deepCopy(this.default_column)
-      let b = this.deepCopy(this.prop_column)
-      let column = this.extend(a, b)
+      let a = this.$deepCopy(this.default_column)
+      let b = this.$deepCopy(this.prop_column)
+      let column = this.$extend(a, b)
       return this.generateClass(column)
     }
   },

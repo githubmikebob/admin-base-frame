@@ -51,7 +51,7 @@ export default {
       },
       list: [],
       page: 1,
-      size: this.autoTableHeight(0, 37, 37, 0, 1),
+      size: this.$autoTableHeight(0, 37, 37, 0, 1),
       total: 0,
       columns: [
         { name: '#', prop: '', width: '', type: 'index', fixed: 'left' },
@@ -79,7 +79,7 @@ export default {
     actions(type, row) {
       switch (type) {
         case 'edit':
-          this._dialog.initInfo(this.$refs.add, row.id)
+          this.$dialog.initInfo(this.$refs.add, row.id)
           break
         case 'status':
           this.setStatus(row, false)

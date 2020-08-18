@@ -3,7 +3,7 @@
       :align="column.align"
       :fixed="column.fixed"
       :header-align="column.head_align"
-      :label="transform(column.name)"
+      :label="$transform(column.name)"
       :width="column.width"
       show-overflow-tooltip
   >
@@ -35,9 +35,9 @@ export default {
       return this.$store.state.app.size
     },
     column() {
-      let a = this.deepCopy(this.default_column)
-      let b = this.deepCopy(this.prop_column)
-      return this.extend(a, b)
+      let a = this.$deepCopy(this.default_column)
+      let b = this.$deepCopy(this.prop_column)
+      return this.$extend(a, b)
     }
   },
   props: {
@@ -88,15 +88,15 @@ export default {
     makeScopeValue,
     handleClick(btn, row, index) {
       let type = btn.event
-      let origin = this.deepCopy(this.origin)
-      let editable = this.deepCopy(this.column.editable)
+      let origin = this.$deepCopy(this.origin)
+      let editable = this.$deepCopy(this.column.editable)
       switch (type) {
         case 'edit':
           for (let v of editable) {
             origin[v] = row[v]
           }
           origin.edit = false
-          this.origin = this.deepCopy(origin)
+          this.origin = this.$deepCopy(origin)
           row.edit = true
           break
         case 'remove':
@@ -108,9 +108,9 @@ export default {
         case 'cancel':
           if (this.origin.length !== {}) {
             this.origin.edit = false
-            let a = this.deepCopy(row)
-            let b = this.deepCopy(this.origin)
-            row = this.extend(a, b)
+            let a = this.$deepCopy(row)
+            let b = this.$deepCopy(this.origin)
+            row = this.$extend(a, b)
             this.$emit('actions', type, row, index)
           } else {
             for (let v of editable) {

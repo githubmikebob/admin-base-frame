@@ -17,7 +17,7 @@
       </el-form-item>
     </el-form>
     <alert ref="alert" :mark="[create_url, update_url]" />
-    <submit-button :saving="requesting" @close="close" @save="vm._dialog.save(vm)"/>
+    <submit-button :saving="requesting" @close="close" @save="vm.$dialog.save(vm)"/>
   </el-dialog>
 </template>
 
@@ -37,7 +37,7 @@ export default {
     submitButton
   },
   created() {
-    this.rule = verify('employee_rule', this.deepCopy(this.form))
+    this.rule = verify('employee_rule', this.$deepCopy(this.form))
   },
   data() {
     return {
@@ -59,7 +59,7 @@ export default {
   methods: {
     opened() {
       this.$nextTick(() => {
-        this._dialog.title(this, 'employee_rule.employee_rule')
+        this.$dialog.title(this, 'employee_rule.employee_rule')
         // 获取数据
       })
     },

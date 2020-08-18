@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     choose() {
-      this.$emit('update:cascade_id', this.deepCopy(this.id[this.id.length - 1]))
+      this.$emit('update:cascade_id', this.$deepCopy(this.id[this.id.length - 1]))
     },
     clear() {
       this.id = [0]
@@ -67,7 +67,7 @@ export default {
   },
   watch: {
     cascade_id(val) {
-      if (val) this.id = this.deepCopy(val)
+      if (val) this.id = this.$deepCopy(val)
       else this.clear()
     }
   }

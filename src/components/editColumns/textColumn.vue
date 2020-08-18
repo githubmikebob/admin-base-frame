@@ -3,7 +3,7 @@
     :align="column.align"
     :fixed="column.fixed"
     :header-align="column.head_align"
-    :label="transform(column.name)"
+    :label="$transform(column.name)"
     :width="column.width"
     show-overflow-tooltip
   >
@@ -13,7 +13,7 @@
           {{ row[column.prop] }}
         </span>
       </div>
-      <el-input :size="size" v-else v-model="row[column.prop]" :placeholder="transform(column.placeholder)" />
+      <el-input :size="size" v-else v-model="row[column.prop]" :placeholder="$transform(column.placeholder)" />
     </template>
   </el-table-column>
 </template>
@@ -27,9 +27,9 @@ export default {
       return this.$store.state.app.size
     },
     column() {
-      let a = this.deepCopy(this.default_column)
-      let b = this.deepCopy(this.prop_column)
-      return this.extend(a, b)
+      let a = this.$deepCopy(this.default_column)
+      let b = this.$deepCopy(this.prop_column)
+      return this.$extend(a, b)
     }
   },
   props: {
