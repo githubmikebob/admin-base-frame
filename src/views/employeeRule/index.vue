@@ -9,9 +9,7 @@
 </template>
 
 <script>
-import normalTable from '../../components/table/normalTable'
 import requesting from '../../global/js/mixin/requesting'
-import add from './add'
 
 import search from '../../global/js/table/search'
 import setStatus from '../../global/js/table/setStatus'
@@ -26,8 +24,8 @@ export default {
   name: 'employee_rule_list',
   mixins: [requesting],
   components: {
-    add,
-    normalTable,
+    add: () => import('./add'),
+    NormalTable: () => import('../../components/table/NormalTable'),
   },
   computed: {
     rules() {

@@ -18,7 +18,7 @@ import { Alert } from 'element-ui'
 import { isArray } from '../../global/js/common/data'
 
 export default {
-  name: 'alert',
+  name: 'Alert',
   components: {
     [Alert.name]: Alert
   },

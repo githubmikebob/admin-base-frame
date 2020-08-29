@@ -17,10 +17,10 @@
       </router-link>
     </scroll-pane>
     <ul :style="{left:left+'px',top:top+'px'}" class="contextmenu" v-show="visible">
-      <li @click="refreshSelectedTag(selectedTag)">{{ $t('button.tabsView.refresh') }}</li>
-      <li @click="closeSelectedTag(selectedTag)" v-if="!isAffix(selectedTag)">{{ $t('button.tabsView.close') }}</li>
-      <li @click="closeOthersTags">{{ $t('button.tabsView.closeOthers') }}</li>
-      <li @click="closeAllTags(selectedTag)">{{ $t('button.tabsView.closeAll') }}</li>
+      <li @click="refreshSelectedTag(selectedTag)">{{ $t('button.tabs_view.refresh') }}</li>
+      <li @click="closeSelectedTag(selectedTag)" v-if="!isAffix(selectedTag)">{{ $t('button.tabs_view.close') }}</li>
+      <li @click="closeOthersTags">{{ $t('button.tabs_view.close_others') }}</li>
+      <li @click="closeAllTags(selectedTag)">{{ $t('button.tabs_view.close_all') }}</li>
     </ul>
   </div>
 </template>

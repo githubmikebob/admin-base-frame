@@ -8,7 +8,7 @@
       class="small_dialog"
       top="8vh"
       width="580px">
-    <el-form :model="form" :rules="rule" :size="globalSize" class="base-form" label-width="80px" ref="form">
+    <el-form :model="form" :rules="rule" :size="global_size" class="base-form" label-width="80px" ref="form">
       <!--隐藏字段 Start -->
       <el-form-item prop="id" v-show="false"/>
       <!--隐藏字段 End -->
@@ -30,20 +30,19 @@
 </template>
 
 <script>
-import submitButton from '../../components/tool/submitButton'
 import { Checkbox, CheckboxGroup } from 'element-ui'
 
 import requesting from '../../global/js/mixin/requesting'
-import globalSize from '../../global/js/mixin/globalSize'
+import global_size from '../../global/js/mixin/global_size'
 import { close } from '../../global/js/common/dialog'
 import verify from '../../global/js/common/verify'
 import { apiPost, checkCode } from '../../global/js/common/http'
 
 export default {
   name: 'shopPower',
-  mixins: [globalSize, requesting],
+  mixins: [global_size, requesting],
   components: {
-    submitButton,
+    SubmitButton: () => import('../../components/tool/SubmitButton'),
     [Checkbox.name]: Checkbox,
     [CheckboxGroup.name]: CheckboxGroup,
   },

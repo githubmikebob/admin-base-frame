@@ -1,14 +1,13 @@
 <script>
 import columnTemplate from '../columns/columns'
-import globalSize from '../../global/js/mixin/globalSize'
-// import autoTableHeight from '../../global/js/function/autoTableHeight'
+import autoTableHeight from '../../global/js/function/autoTableHeight'
+import global_size from '../../global/js/mixin/global_size'
 
 export default {
-  name: 'normalTable',
-  mixins: [globalSize],
+  name: 'NormalTable',
+  mixins: [global_size],
   data() {
-    return {
-    }
+    return {}
   },
   computed: {
     listHeight() {
@@ -16,7 +15,7 @@ export default {
       let rowHeight = this.$deepCopy(this.rowHeight)
       let tabHeight = this.$deepCopy(this.tabHeight)
       let size = this.$deepCopy(this.paginationSize)
-      return this.$autoTableHeight(size, headHeight, rowHeight, tabHeight)
+      return autoTableHeight(size, headHeight, rowHeight, tabHeight)
     }
   },
   props: {
@@ -32,6 +31,7 @@ export default {
     page: { type: Number, default: 1 }, // 页数
     size: { type: Number, default: 15 }, // 页面大小
     saving: { type: Boolean, default: false },
+    executing: { type: Boolean, default: false }, // 正在执行请求 Info
     list: {
       required: true,
       type: Array, default() {
@@ -54,33 +54,22 @@ export default {
     let columns = []
     for (let v of this.columns) {
       let option = {}
-      if (v.type === 'index') {
-        option = {
-          props: {
-            prop_column: v,
-            page: this.page,
-            size: this.size
-          }
-        }
-      } else if (v.type === 'action') {
-        option = {
-          props: {
-            prop_column: v,
-            saving: this.saving
-          }
-        }
-      } else {
-        option = {
-          props: {
-            prop_column: v
-          }
-        }
+      switch (v.type) {
+        default:
+          option = { props: { prop_column: v }}
+          break
+        case 'index':
+          option = { props: { prop_column: v, page: this.page, size: this.size }}
+          break
+        case 'action':
+        case 'switch':
+          option = { props: { prop_column: v, executing: this.executing }}
+          break
       }
-      if (v.type === 'text' || v.type === 'action' || v.type === 'tags' || v.type === 'status' || v.type === 'tag') {
+      let need_actions = ['action', 'switch', 'status', 'tag', 'tags']
+      if (need_actions.includes(v.type)) {
         option = Object.assign(option, {
-          on: {
-            actions: this.actions
-          }
+          on: { actions: this.actions }
         })
       }
       columns.push(createElement(columnTemplate[v.type], option))
@@ -95,7 +84,7 @@ export default {
       },
       props: {
         data: this.list,
-        size: this.globalSize,
+        size: this.global_size,
         height: this.listHeight,
         highlightCurrentRow: this.highlight,
         border: this.border,

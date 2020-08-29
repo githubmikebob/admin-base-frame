@@ -12,7 +12,6 @@
 
 <script>
 
-import normalSelect from '../../components/selection/normalSelect'
 import storage from '../../global/js/common/storage'
 import requesting from '../../global/js/mixin/requesting'
 
@@ -23,7 +22,7 @@ export default {
   name: 'topMenu',
   mixins: [requesting],
   components: {
-    normalSelect
+    NormalSelect: () => import('../../components/selection/NormalSelect')
   },
   props: {
     select_id: { required: true, type: Number },

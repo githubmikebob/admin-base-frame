@@ -17,6 +17,7 @@ export default {
     1: '启用',
     2: '停用'
   },
+  action: '操作',
   placeholder: {
     select_type: '请选择类型',
     select: '请选择...',

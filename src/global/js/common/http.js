@@ -89,8 +89,8 @@ axios.interceptors.response.use((res) => {
 export const apiPost = (url, params = {}, base) => {
   return new Promise((resolve, reject) => {
     if (!base) base = deepCopy(api)
-    axios.defaults.baseURL = getApiUrl(base)
-    // axios.defaults.baseURL = process.env.VUE_APP_BASE_API
+    // axios.defaults.baseURL = getApiUrl(base)
+    axios.defaults.baseURL = process.env.VUE_APP_BASE_API
     axios.post(url, params).then(response => {
       resolve(response)
     }, err => {

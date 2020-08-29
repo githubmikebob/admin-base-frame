@@ -1,23 +1,23 @@
-import indexColumn from './indexColumn'
-import textColumn from './textColumn'
-import arrayColumn from './arrayColumn';
-import priceColumn from './priceColumn'
-import tagColumn from './tagColumn'
-import tagsColumn from './tagsColumn'
-import timeColumn from './timeColumn'
-import statusColumn from './statusColumn'
-import actionColumn from './actionColumn'
+import IndexColumn from './IndexColumn'
+import TextColumn from './TextColumn'
+import ArrayColumn from './ArrayColumn'
+import PriceColumn from './PriceColumn'
+import TagColumn from './TagColumn'
+import TagsColumn from './TagsColumn'
+import TimeColumn from './TimeColumn'
+import StatusColumn from './StatusColumn'
+import SwitchColumn from './SwitchColumn'
+import ActionColumn from './ActionColumn'
 
-export const columnTemplate = {
-  index: indexColumn,
-  text: textColumn,
-  array: arrayColumn,
-  price: priceColumn,
-  tag: tagColumn,
-  tags: tagsColumn,
-  time: timeColumn,
-  status: statusColumn,
-  action: actionColumn
+export default {
+  index: IndexColumn,
+  text: TextColumn,
+  array: ArrayColumn,
+  price: PriceColumn,
+  tag: TagColumn,
+  tags: TagsColumn,
+  time: TimeColumn,
+  status: StatusColumn,
+  switch: SwitchColumn,
+  action: ActionColumn
 }
-
-export default columnTemplate

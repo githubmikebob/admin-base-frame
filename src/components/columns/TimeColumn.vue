@@ -5,8 +5,7 @@
       :header-align="column.head_align"
       :label="$t(column.name)"
       :width="column.width"
-      show-overflow-tooltip
-  >
+      :show-overflow-tooltip="column.show_tip">
     <template slot-scope="scope">
       <span>{{makeScopeDate(scope.row, column.prop, column.format)}}</span>
     </template>
@@ -36,6 +35,7 @@ export default {
         type: 'text',
         language: '',
         fixed: false,
+        show_tip: true,
         date_format: 'date',
         width: '100',
         prop: ''

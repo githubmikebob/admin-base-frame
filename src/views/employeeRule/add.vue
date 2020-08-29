@@ -9,7 +9,7 @@
       class="small_dialog"
       width="20%"
       :close-on-click-modal="false">
-    <el-form :model="form" :rules="rule" :size="globalSize" class="base-form" label-width="80px" ref="form">
+    <el-form :model="form" :rules="rule" :size="global_size" class="base-form" label-width="80px" ref="form">
       <el-form-item prop="id" v-show="false"/>
       <el-form-item prop="menu_id" v-show="false"/>
       <el-form-item :label="$t('employee_rule.rule')" prop="rule">
@@ -26,15 +26,14 @@
 import verify from '../../global/js/common/verify'
 import { close } from '../../global/js/common/dialog';
 
-import submitButton from '../../components/tool/submitButton'
 import requesting from '../../global/js/mixin/requesting'
-import globalSize from '../../global/js/mixin/globalSize'
+import global_size from '../../global/js/mixin/global_size'
 
 export default {
   name: 'employee_rule_add',
-  mixins: [globalSize, requesting],
+  mixins: [global_size, requesting],
   components: {
-    submitButton
+    SubmitButton: () => import('../../components/tool/SubmitButton')
   },
   created() {
     this.rule = verify('employee_rule', this.$deepCopy(this.form))

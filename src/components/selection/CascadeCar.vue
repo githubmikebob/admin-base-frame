@@ -4,7 +4,7 @@
       :options="cascade"
       :placeholder="placeholder"
       :props="props"
-      :size="globalSize"
+      :size="global_size"
       :style="'width: ' + width"
       @change="choose"
       filterable
@@ -14,12 +14,12 @@
 
 <script>
 import { Cascader } from 'element-ui'
-import { apiPost } from '../../global/js/common/http'
-import globalSize from '../../global/js/mixin/globalSize'
+import { apiPost, checkCode } from '../../global/js/common/http'
+import global_size from '../../global/js/mixin/global_size'
 
 export default {
   name: 'cascadeCar',
-  mixins: [globalSize],
+  mixins: [global_size],
   components: {
     [Cascader.name]: Cascader
   },
@@ -52,14 +52,14 @@ export default {
     },
     getCascade(params = {}) {
       let that = this
-      let cascader = that.storage.get('brand_cascade')
-      if (cascader) { // localstorage获取车品牌级联数据
-        that.cascade = that.storage.get('brand_cascade')
+      let cascade = that.$storage.get('brand_cascade')
+      if (cascade) { // localstorage获取车品牌级联数据
+        that.cascade = that.$storage.get('brand_cascade')
       } else {
-        apiPost(this.url, params).then((res) => {
-          if (res.code === 200) {
-            that.storage.set('brand_cascade', res.data, 7 * 24 * 60 * 60)
-            that.cascade = res.data
+        apiPost(this.url, params).then(({ code, data }) => {
+          if (checkCode(code)) {
+            that.$storage.set('brand_cascade', data, 7 * 24 * 60 * 60)
+            that.cascade = data
           }
         })
       }

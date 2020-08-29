@@ -1,14 +1,14 @@
 <template>
   <el-dialog
-      :before-close="close"
-      :title="title"
-      :visible.sync="dialog"
-      @opened="open()"
-      append-to-body
-      class="small_dialog"
-      top="8vh"
-      width="480px">
-    <el-form :model="form" :rules="rule" :size="globalSize" class="base-form" label-width="80px" ref="form">
+    :before-close="close"
+    :title="title"
+    :visible.sync="dialog"
+    @opened="open()"
+    append-to-body
+    class="small_dialog"
+    top="8vh"
+    width="480px">
+    <el-form :model="form" :rules="rule" :size="global_size" class="base-form" label-width="80px" ref="form">
       <!--隐藏字段 Start -->
       <el-form-item prop="id" v-show="false"/>
       <el-form-item prop="province_id" v-show="false"/>
@@ -52,22 +52,18 @@
 </template>
 
 <script>
-import selectDistrict from '../../components/selection/selectDistrict'
-import submitButton from '../../components/tool/submitButton'
-import dataPicker from '../../components/tool/dataPicker'
-
 import requesting from '../../global/js/mixin/requesting'
-import globalSize from '../../global/js/mixin/globalSize'
+import global_size from '../../global/js/mixin/global_size'
 import { close } from '../../global/js/common/dialog'
 import verify from '../../global/js/common/verify'
 
 export default {
   name: 'addShop',
-  mixins: [globalSize, requesting],
+  mixins: [global_size, requesting],
   components: {
-    selectDistrict,
-    submitButton,
-    dataPicker
+    SubmitButton: () => import('../../components/tool/SubmitButton'),
+    DataPicker: () => import('../../components/tool/DataPicker'),
+    SelectDistrict: () => import('../../components/selection/SelectDistrict'),
   },
   created() {
     this.rule = verify('shop', this.$deepCopy(this.form))

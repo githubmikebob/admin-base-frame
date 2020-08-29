@@ -40,20 +40,20 @@ module.exports = {
   // css: {},
   // 它支持webPack-dev-server的所有选项
   // devServer:{type:Object} 3个属性host,port,https
-  // devServer: {
-  //   // host: '127.0.0.1',
-  //   // port: 8888,
-  //   // https: true,
-  //   // proxy: { // 配置跨域处理,只有一个代理
-  //   //   '/api': {
-  //   //     target: 'https://apiadmin.softkgj.com',  // 后台接口域名
-  //   //     secure: true,  // 如果是https接口，需要配置这个参数
-  //   //     changeOrigin: true,  // 是否跨域
-  //   //     pathRewrite: {
-  //   //       '^/api': ''
-  //   //     }
-  //   //     // ws: true,  // 如果要代理 websockets，配置这个参数
-  //   //   }
-  //   // }
-  // },
+  devServer: {
+    // host: '0.0.0.0',
+    // port: 8080,
+    // https: true,
+    proxy: { // 配置跨域处理,只有一个代理
+      '/api': {
+        target: 'https://apiadmin.softkgj.com',  // 后台接口域名
+        secure: true,  // 如果是https接口，需要配置这个参数
+        changeOrigin: true,  // 是否跨域
+        pathRewrite: {
+          '^/api': ''
+        }
+        // ws: true,  // 如果要代理 websockets，配置这个参数
+      }
+    }
+  },
 }

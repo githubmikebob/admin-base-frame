@@ -1,22 +1,25 @@
 <template>
   <el-tooltip
-    :content="$transform('search.' + placeholder)"
-    :placement="placement"
-    :enterable="enterable"
-    :effect="effect">
-      <el-input
-        :placeholder="$transform('search.' + placeholder)"
-        :size="size"
+      :content="this.$transform(placeholder)"
+      :placement="placement"
+      :enterable="enter_able"
+      :effect="effect">
+    <el-input
+        :placeholder="this.$transform(placeholder)"
+        :size="global_size"
         :clearable="clearable"
         :style="'width: ' + width + ';margin-left: ' + margin_left"
         @keyup.enter.native="search"
-        v-model="value" />
+        v-model="value"/>
   </el-tooltip>
 </template>
 
 <script>
+import global_size from '../../global/js/mixin/global_size'
+
 export default {
-  name: 'searchInput',
+  name: 'SearchInput',
+  mixins: [global_size],
   computed: {
     size() {
       return this.$store.state.app.size
@@ -24,13 +27,13 @@ export default {
   },
   props: {
     keyword: { required: true, type: String, default: '' },
-    placeholder: { required: true, type: String, default: 'keyword' },
+    placeholder: { type: String, default: 'base.search.keyword' },
     clearable: { type: Boolean, default: true },
     width: { type: String, default: '20%' },
     margin_left: { type: String, default: '8px' },
     placement: { type: String, default: 'top' },
     effect: { type: String, default: 'dark' },
-    enterable: { type: Boolean, default: false }
+    enter_able: { type: Boolean, default: false }
   },
   data() {
     return {

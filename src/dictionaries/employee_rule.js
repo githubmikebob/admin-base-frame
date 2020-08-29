@@ -72,7 +72,6 @@ export function generatePlaceholders() {
 
 /**
  * 生成验证规则
- * @returns {{name: {required: string, length_gt: string}, title: {required: string, length_gt: string}}}
  */
 export function generateVerify() {
   return {

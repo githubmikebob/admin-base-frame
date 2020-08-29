@@ -1,6 +1,6 @@
 export default {
   computed: {
-    globalSize() {
+    global_size() {
       return this.$store.state.app.size
     }
   }

@@ -1,13 +1,13 @@
 <template>
   <el-table-column
+    type="index"
     :align="column.align"
+    :header-align="column.head_align"
     :fixed="column.fixed"
     :index="formatIndex"
     :label="$transform(column.name)"
     :width="width"
-    show-overflow-tooltip
-    type="index"
-  />
+    :show-overflow-tooltip="column.show_tip"/>
 </template>
 
 <script>
@@ -22,17 +22,7 @@ export default {
     }
   },
   props: {
-    prop_column: {
-      type: Object,
-      default() {
-        return {
-          name: '#',
-          align: 'center',
-          fixed: 'left',
-          type: 'index'
-        }
-      }
-    },
+    prop_column: { type: Object },
     size: { type: Number, default: 15 },
     page: { type: Number, default: 1 }
   },
@@ -40,10 +30,12 @@ export default {
     return {
       width: 50,
       default_column: {
+        type: 'index', // 引导效果，没有实际使用
+        name: 'item.sort',
         align: 'center',
+        head_align: 'center',
         fixed: 'left',
-        name: '#',
-        type: 'index'
+        show_tip: false
       }
     }
   },

@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="tool-bar">
-      <open-button @open="vm._dialog.open(vm)" />
+      <open-button @open="vm.$dialog.open(vm)" />
       <refresh-button @refresh="refreshTable" />
-      <search-input ref="searchInput" :keyword.sync="keyword.keyword.value" @search="search" placeholder="company" width="30%" />
+      <search-input ref="searchInput" :keyword.sync="keyword.keyword.value" @search="search" placeholder="search.company" width="30%" />
       <radio-group :type.sync="keyword.status.value" target="item.state" />
       <search-button @search="search" />
     </div>
@@ -15,11 +15,7 @@
 </template>
 
 <script>
-import normalTable from '../../components/table/normalTable'
-import radioGroup from '../../components/tool/radioGroup'
 import requesting from '../../global/js/mixin/requesting'
-import add from './add'
-import shop from './shop'
 
 import search from '../../global/js/table/search'
 import setStatus from '../../global/js/table/setStatus'
@@ -35,10 +31,10 @@ export default {
     })
   },
   components: {
-    normalTable,
-    radioGroup,
-    add,
-    shop
+    NormalTable: () => import('../../components/table/NormalTable'),
+    RadioGroup: () => import('../../components/tool/RadioGroup'),
+    add: () => import('./add'),
+    shop: () => import('./shop')
   },
   data() {
     return {
@@ -56,16 +52,16 @@ export default {
       size: this.$autoTableHeight(0, 37, 37, 0, 1),
       total: 0,
       columns: [
-        { name: '#', prop: '', width: '', type: 'index', fixed: 'left' },
+        { type: 'index' },
         { name: 'company.name', prop: 'name', width: '220', type: 'text' },
-        { name: 'company.contact', prop: 'company.contact', width: '100', type: 'text' },
+        { name: 'company.contact', prop: 'contact', width: '100', type: 'text' },
         { name: 'company.mobile', prop: 'contact_mobile', width: '100', type: 'text' },
         { name: 'company.district', prop: ['province.name', 'city.name', 'district.name'], width: '180', type: 'text' },
         { name: 'company.address', prop: 'address', width: '220', type: 'text' },
         { name: 'item.remark', prop: 'remark', type: 'text' },
         { name: 'item.status', prop: 'status', type: 'status', fixed: 'right' },
         {
-          type: 'action', width: '110', buttons: [
+          name: 'item.action', type: 'action', width: '110', buttons: [
             { name: 'button.edit', prop: '', type: 'success', event: 'edit' },
             { name: 'shop.shop', prop: '', type: 'primary', event: 'shop' }
           ]

@@ -4,7 +4,7 @@
       :options="cascade"
       :placeholder="placeholder"
       :props="props"
-      :size="globalSize"
+      :size="global_size"
       :style="'width: ' + width + '; margin-left:' + margin_left"
       @change="choose"
       clearable
@@ -17,11 +17,11 @@
 
 import { Cascader } from 'element-ui'
 import { apiPost } from '../../global/js/common/http'
-import globalSize from '../../global/js/mixin/globalSize'
+import global_size from '../../global/js/mixin/global_size'
 
 export default {
   name: 'selectDistrict',
-  mixins: [globalSize],
+  mixins: [global_size],
   components: {
     [Cascader.name]: Cascader
   },
@@ -58,7 +58,7 @@ export default {
         apiPost('/District/Cascade', {}).then((res) => {
           if (res.code === 200) {
             that.cascade = res.data
-            that.storage.set('Cascade', res.data, 3600)
+            that.$storage.set('Cascade', res.data, 3600)
           }
         })
       } else {

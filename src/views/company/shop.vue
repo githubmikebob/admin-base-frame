@@ -9,7 +9,7 @@
           width="880">
     <div class="tool-bar">
       <open-button @open="vm.$dialog.open(vm)" />
-      <search-input ref="searchInput" :keyword.sync="keyword.keyword.value" @search="search" placeholder="shop"
+      <search-input ref="searchInput" :keyword.sync="keyword.keyword.value" @search="search" placeholder="search.shop"
                     width="30%"/>
       <search-button @search="search"/>
     </div>
@@ -20,22 +20,20 @@
 </template>
 
 <script>
-import normalTable from '../../components/table/normalTable'
-import add from '../shop/add'
 
 // import verify from '../../global/js/common/verify'
 import requesting from '../../global/js/mixin/requesting'
-import globalSize from '../../global/js/mixin/globalSize'
+import global_size from '../../global/js/mixin/global_size'
 import search from '../../global/js/table/search'
 import { apiPost } from '../../global/js/common/http'
 
 
 export default {
   name: 'shopList',
-  mixins: [globalSize, requesting],
+  mixins: [global_size, requesting],
   components: {
-    normalTable,
-    add
+    NormalTable: () => import('../../components/table/NormalTable'),
+    add: () => import('../shop/add')
   },
   created() {
     // this.rule = verify('company', this.$deepCopy(this.form))
@@ -59,7 +57,7 @@ export default {
       columns: [
         { name: '#', prop: '', width: '', type: 'index', fixed: 'left' },
         { name: 'shop.name', prop: 'name', width: '180', type: 'text' },
-        { name: 'shop.contact', prop: 'shop.contact', width: '90', type: 'text' },
+        { name: 'shop.contact', prop: 'contact', width: '90', type: 'text' },
         { name: 'shop.mobile', prop: 'contact_mobile', width: '100', type: 'text' },
         { name: 'item.remark', prop: 'remark', type: 'text' },
         {

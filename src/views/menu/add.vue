@@ -1,7 +1,7 @@
 <template>
   <el-dialog :before-close="close" :title="title" :visible.sync="dialog"
              @opened="opened()" append-to-body class="small_dialog" top="8vh" width="400px">
-    <el-form :model="form" :rules="rule" :size="globalSize" class="base-form" label-width="80px" ref="form">
+    <el-form :model="form" :rules="rule" :size="global_size" class="base-form" label-width="80px" ref="form">
       <!--隐藏字段 Start -->
       <el-form-item prop="id" v-show="false"/>
       <el-form-item :label="$t('menu.top_menu')" prop="menu_id">
@@ -36,19 +36,18 @@
 
 <script>
 import topMenu from './topMenu'
-import submitButton from '../../components/tool/submitButton'
 import requesting from '../../global/js/mixin/requesting'
-import globalSize from '../../global/js/mixin/globalSize'
+import global_size from '../../global/js/mixin/global_size'
 
 import { close } from '../../global/js/common/dialog'
 import verify from '../../global/js/common/verify'
 
 export default {
   name: 'menu_add',
-  mixins: [globalSize, requesting],
+  mixins: [global_size, requesting],
   components: {
-    topMenu,
-    submitButton
+	  SubmitButton: () => import('../../components/tool/SubmitButton'),
+	  topMenu
   },
   created() {
     this.rule = verify('menu', this.$deepCopy(this.form))

@@ -1,11 +1,11 @@
 <template>
   <el-table-column
-      :align="column.align"
-      :fixed="column.fixed"
-      :header-align="column.head_align"
-      :label="$transform(column.name)"
-      :width="column.width"
-      show-overflow-tooltip
+    :align="column.align"
+    :fixed="column.fixed"
+    :header-align="column.head_align"
+    :label="$transform(column.name)"
+    :width="column.width"
+    show-overflow-tooltip
   >
     <template slot-scope="{ row }">
       <el-tooltip placement="top" effect="dark" trigger="hover">
@@ -41,6 +41,9 @@ export default {
       let a = this.$deepCopy(this.default_column)
       let b = this.$deepCopy(this.prop_column)
       let column = this.$extend(a, b)
+      // console.log('$extend', this.$extend(a, b))
+      // console.log('a', a)
+      // console.log('b', b)
       return this.generateClass(column)
     }
   },

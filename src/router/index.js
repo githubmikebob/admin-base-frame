@@ -7,6 +7,16 @@ import customerRouter from './modules/customer'
 
 Vue.use(VueRouter)
 
+// 重写路由方法，解决重复路由引起的报错
+const originalReplace = VueRouter.prototype.replace
+VueRouter.prototype.replace = function replace(location) {
+  return originalReplace.call(this, location).catch(err => err);
+}
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 /**
  * 基础路由
  * a base page that does not have permission requirements

@@ -1,6 +1,6 @@
 <template>
   <span class="custom-color" :style="'margin-left: ' + margin_left">
-    <i class="fas fa-exclamation-circle success" style="margin-right: 8px"/>
+    <i class="fas fa-exclamation-circle success" style="margin-right: 8px" />
     <span class="info" style="font-size: 14px">{{tip}}</span>
   </span>
 </template>

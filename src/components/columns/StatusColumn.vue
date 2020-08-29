@@ -3,11 +3,10 @@
     :align="column.align"
     :fixed="column.fixed"
     :header-align="column.head_align"
-    :label="$t(column.name)"
+    :label="$transform(column.name)"
     :prop="column.prop"
     :width="column.width"
-    show-overflow-tooltip
-  >
+    :show-overflow-tooltip="column.show_tip">
     <template slot-scope="{row}">
       <el-switch
         :active-value="1"
@@ -49,7 +48,8 @@ export default {
         fixed: false,
         width: '70',
         prop: '',
-        change: 'change'
+        change: 'change',
+        show_tip: true
       }
     }
   },

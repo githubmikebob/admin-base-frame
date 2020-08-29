@@ -2,7 +2,7 @@
   <el-select
           :disabled="disabled"
           :filter-method="search"
-          :size="globalSize"
+          :size="global_size"
           @change="change"
           filterable
           v-model="id"
@@ -18,11 +18,11 @@
 
 <script>
 import { apiPost } from '../../global/js/common/http'
-import globalSize from '../../global/js/mixin/globalSize'
+import global_size from '../../global/js/mixin/global_size'
 
 export default {
   name: 'selectMenu',
-  mixins: [globalSize],
+  mixins: [global_size],
   data() {
     return {
       url: '/UserMenu/GetTop',
@@ -65,13 +65,13 @@ export default {
       let that = this
       that.pool = []
       if (that.top) that.pool.push(that.top_menu)
-      let menus = that.storage.get(key)
+      let menus = that.$storage.get(key)
       if (menus) { that.pool = that.pool.concat(menus) }
       else {
         await apiPost(that.url, post).then((res) => {
           if (res.code === 200) {
             that.pool = that.pool.concat(res.data)
-            that.storage.set(key, res.data, 3600)
+            that.$storage.set(key, res.data, 3600)
           }
         })
       }

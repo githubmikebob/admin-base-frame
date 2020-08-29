@@ -1,5 +1,5 @@
 <template>
-  <div :align="align" slot="footer">
+  <div :align="align" slot="footer" style="margin-right: 2vh">
     <el-button :size="size" @click="close" type="default" v-if="!saving">{{$t(cancel)}}</el-button>
     <el-button :size="size" @click="save()" type="primary" v-if="!saving">{{$t(submit)}}</el-button>
     <i class="el-icon-loading color-primary" style="font-size: 25px" v-if="saving"></i>

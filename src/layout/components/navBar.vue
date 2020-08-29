@@ -13,7 +13,7 @@
         </div>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>
-            <span @click="cleanCache()">{{ $t('button.clearCache') }}</span>
+            <span @click="cleanCache()">{{ $t('button.clear_cache') }}</span>
           </el-dropdown-item>
           <el-dropdown-item divided>
             <span @click="logout" style="display:block;">{{ $t('login.logout') }}</span>
@@ -26,11 +26,8 @@
 
 <script>
 import { Dropdown, DropdownItem, DropdownMenu, Tooltip } from 'element-ui'
-import breadcrumb from '../../components/tool/breadcrumb';
-import hamburger from '../../components/tool/hamburger';
 
 import { mapGetters } from 'vuex'
-import { apiPost, checkCode } from '../../global/js/common/http'
 import { load } from '../../global/js/common/message'
 // import { disConnect } from '../../global/js/websocket'
 import { loginPage } from '../../views/login/login'
@@ -38,9 +35,9 @@ import { loginPage } from '../../views/login/login'
 export default {
   name: 'navBar',
   components: {
-    breadcrumb,
-    hamburger,
-    [Tooltip.name]: Tooltip,
+	  Breadcrumb: () => import('../../components/tool/Breadcrumb'),
+	  Hamburger: () => import('../../components/tool/Hamburger'),
+	  [Tooltip.name]: Tooltip,
     [Dropdown.name]: Dropdown,
     [DropdownMenu.name]: DropdownMenu,
     [DropdownItem.name]: DropdownItem
@@ -61,9 +58,9 @@ export default {
       let that = this
       let user = this.$storage.get('user')
       let loading = load('login.exiting')
-      apiPost('/User/Logout', { username: user.username, fd: this.socket.fd }).then((res) => {
+      this.$apiPost('/User/Logout', { username: user.username, fd: this.socket.fd }).then((res) => {
         if (res.code === 200) {
-          that.storage.clear()
+          that.$storage.clear()
           that.$store.dispatch('user/logout')
           // disConnect()
           loginPage()
@@ -72,8 +69,8 @@ export default {
       })
     },
     cleanCache() {
-      apiPost('/System/CleanCache', {}).then(res => {
-        if (checkCode(res.code)) this.message.notify(res.message, res.status)
+      this.$apiPost('/System/CleanCache', {}).then(res => {
+        if (this.$checkCode(res.code)) this.$message.notify(res.message, res.status)
       })
     }
   }

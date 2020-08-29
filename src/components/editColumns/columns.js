@@ -1,13 +1,13 @@
-import indexColumn from '../columns/indexColumn'
-import textColumn from './textColumn'
-import autoTextColumn from './autoTextColumn'
-import actionColumn from './actionColumn'
+import IndexColumn from '../columns/IndexColumn'
+import TextColumn from './TextColumn'
+import AutoTextColumn from './AutoTextColumn'
+import ActionColumn from './ActionColumn'
 
 export const columnTemplate = {
-  index: indexColumn,
-  text: textColumn,
-  auto_text: autoTextColumn,
-  action: actionColumn
+  index: IndexColumn,
+  text: TextColumn,
+  auto_text: AutoTextColumn,
+  action: ActionColumn
 }
 
 export default columnTemplate

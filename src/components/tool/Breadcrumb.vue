@@ -13,7 +13,6 @@
 
 <script>
 import { Breadcrumb, BreadcrumbItem } from 'element-ui'
-import { transformMenu } from '../../locales/i18n/transformMenu'
 
 export default {
   name: 'Breadcrumb',
@@ -30,7 +29,6 @@ export default {
     this.getBreadcrumb()
   },
   methods: {
-    transformMenu,
     getBreadcrumb() {
       // only show routes with meta.title
       let matched = this.$route.matched.filter(item => item.meta && item.meta.title)

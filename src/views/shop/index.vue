@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="tool-bar">
-      <open-button @open="vm._dialog.open(vm)"/>
+      <open-button @open="vm.$dialog.open(vm)"/>
       <refresh-button @refresh="refreshTable"/>
-      <search-input ref="searchInput" :keyword.sync="keyword.keyword.value" @search="search" placeholder="shop"
+      <search-input ref="searchInput" :keyword.sync="keyword.keyword.value" @search="search" placeholder="search.shop"
                     width="30%"/>
       <radio-group :type.sync="keyword.status.value" target="item.state"/>
       <search-button @search="search"/>
@@ -16,11 +16,6 @@
 </template>
 
 <script>
-import normalTable from '../../components/table/normalTable'
-import radioGroup from '../../components/tool/radioGroup'
-import add from './add'
-import power from './power'
-
 // import {apiPost} from '../../global/js/common/http'
 import requesting from '../../global/js/mixin/requesting'
 import search from '../../global/js/table/search'
@@ -37,10 +32,10 @@ export default {
     })
   },
   components: {
-    normalTable,
-    radioGroup,
-    add,
-    power
+    NormalTable: () => import('../../components/table/NormalTable'),
+    RadioGroup: () => import('../../components/tool/RadioGroup'),
+    add: () => import('./add'),
+    power: () => import('./power')
   },
   data() {
     return {
@@ -61,7 +56,7 @@ export default {
         { name: '#', prop: '', width: '', type: 'index', fixed: 'left' },
         { name: 'shop.name', prop: 'name', width: '180', type: 'text' },
         { name: 'company.name', prop: 'company.name', width: '220', type: 'text' },
-        { name: 'shop.contact', prop: 'shop.contact', width: '90', type: 'text' },
+        { name: 'shop.contact', prop: 'contact', width: '90', type: 'text' },
         { name: 'shop.mobile', prop: 'contact_mobile', width: '100', type: 'text' },
         { name: 'shop.district', prop: ['province.name', 'city.name', 'district.name'], width: '180', type: 'text' },
         { name: 'shop.expired_at', prop: 'expired_at', width: '140', type: 'text' },

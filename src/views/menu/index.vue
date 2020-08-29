@@ -1,23 +1,22 @@
 <template>
   <div>
     <div class="tool-bar">
-      <open-button @open="vm._dialog.open(vm)"/>
+      <open-button @open="vm.$dialog.open(vm)"/>
       <refresh-button @refresh="refreshTable"/>
-      <search-input ref="searchInput" :keyword.sync="keyword.keyword.value" @search="search" placeholder="menu" width="30%"/>
+      <search-input ref="searchInput" :keyword.sync="keyword.keyword.value" @search="search" placeholder="search.menu"
+                    width="30%"/>
       <radio-group :type.sync="keyword.status.value" target="item.state"/>
       <search-button @search="search"/>
     </div>
-    <normal-table ref="table" :columns="columns" :list="menus" :page="page" :size="size" :table="requesting" @actions="actions"/>
+    <normal-table ref="table" :columns="columns" :list="menus" :page="page" :size="size" :table="requesting"
+                  @actions="actions"/>
     <pagination :mark="url" :page.sync="page" :size.sync="size" :total="total"></pagination>
     <add ref="add" @refresh="refreshTable"/>
   </div>
 </template>
 
 <script>
-import normalTable from '../../components/table/normalTable'
-import radioGroup from '../../components/tool/radioGroup'
 import requesting from '../../global/js/mixin/requesting'
-import add from './add'
 
 import search from '../../global/js/table/search'
 import setStatus from '../../global/js/table/setStatus'
@@ -35,9 +34,9 @@ export default {
     })
   },
   components: {
-    add,
-    normalTable,
-    radioGroup,
+    NormalTable: () => import('../../components/table/NormalTable'),
+    RadioGroup: () => import('../../components/tool/RadioGroup'),
+    add: () => import('./add')
   },
   computed: { // 动态匹配数据
     menus() {
