@@ -1,10 +1,10 @@
-import layout from '../../layout/layout'
+import Layout from '../../layout/Layout'
 
 const customerRouter = {
   path: '/Customer',
   name: 'Customer',
   redirect: '/Customers',
-  component: layout,
+  component: Layout,
   meta: { title: '客户管理', icon: 'fas fa-users', auth: 'Customer' },
   children: [
     {

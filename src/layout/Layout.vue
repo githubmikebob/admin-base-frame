@@ -1,13 +1,13 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <div @click="handleClickOutside" class="drawer-bg" v-if="device === 'mobile' && sidebar.opened" />
-    <side-bar class="sidebar-container" />
+    <div @click="handleClickOutside" class="drawer-bg" v-if="device === 'mobile' && sidebar.opened"/>
+    <side-bar class="sidebar-container"/>
     <div :class="{hasTagsView:needTabsView}" class="main-container">
       <div class="fixed-header">
-        <nav-bar />
-        <tabs-view v-if="needTabsView" />
+        <nav-bar/>
+        <tabs-view v-if="needTabsView"/>
       </div>
-      <app-main />
+      <app-main/>
       <!--      <right-panel v-if="showSettings">-->
       <!--        <settings />-->
       <!--      </right-panel>-->

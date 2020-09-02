@@ -1,91 +1,124 @@
-import storage from '../../global/js/common/storage'
+import router from '@/router'
+import storage from '@/global/js/common/storage'
+import { load, notify } from '@/global/js/common/message'
+import * as $defaultApi from '@/api/default'
 
 const state = {
-  user: {
-    id: storage.get('user') ? storage.get('user').id : '',
-    nickname: storage.get('user') ? storage.get('user').nickname : '',
-    username: storage.get('user') ? storage.get('user').username : ''
-  },
-  token: {
-    access_token: storage.get('token') ? storage.get('token').access_token : '',
-    token_expired: storage.get('token') ? storage.get('token').expired : 0
-  },
-  menus: storage.get('menus') ? storage.get('menus') : [],
-  rules: storage.get('rules') ? storage.get('rules') : []
+  userInfo: storage.get('userInfo') || { admin: '', id: '', mobile: '', name: '' },
+  token: storage.get('token') || { access_token: '', expire_in: 0 },
+  menus: storage.get('menus') || [],
+  rules: storage.get('rules') || [],
+  driverCode: storage.get('driverCode') || '',
+  api: storage.get('api') || '',
 }
 
 const mutations = {
-  SET_USER: (state, user) => {
-    state.user.id = user.id
-    state.user.nickname = user.nickname
-    state.user.username = user.username
-    storage.set('user', user, 1800)
+  SET_USER_INFO: (state, info) => {
+    state.userInfo = info
+    storage.set('userInfo', info, 1800)
   },
-  CLEAR_USER: state => {
-    state.user.id = ''
-    state.user.nickname = ''
-    state.user.username = ''
-    storage.remove('user')
+  CLEAR_USER_INFO: state => {
+    state.userInfo = { admin: '', id: '', mobile: '', name: '' }
+    storage.remove('userInfo')
   },
   SET_TOKEN: (state, token) => {
-    token.expired = new Date() - 1 + token.expire_in * 1000
-    state.token.access_token = token.access_token
-    state.token.token_expired = token.expired
-    storage.set('token', token, token.expire_in)
+    let expired = token.expire_in || (7 * 24 * 60 * 60)
+    state.token = token
+    storage.set('token', token, expired)
   },
   CLEAR_TOKEN: state => {
-    state.token.access_token = ''
-    state.token.token_expired = 0
+    state.token = { access_token: '', expire_in: 0 }
     storage.remove('token')
   },
-  SET_MENU: (state, menus) => {
+  SET_MENUS: (state, menus) => {
     state.menus = menus
-    storage.set('menus', menus, 0)
+    storage.set('menus', menus)
   },
-  CLEAR_MENU: state => {
+  CLEAR_MENUS: state => {
     state.menus = []
     storage.remove('menus')
   },
-  SET_RULE: (state, rules) => {
+  SET_RULES: (state, rules) => {
     state.rules = rules
-    storage.set('rules', rules, 0)
+    storage.set('rules', rules)
   },
-  CLEAR_RULE: state => {
+  CLEAR_RULES: state => {
     state.rules = []
     storage.remove('rules')
+  },
+  SET_DRIVER_CODE: (state, code) => {
+    state.driverCode = code
+    storage.set('driverCode', code, 7 * 24 * 60 * 60)
+  },
+  CLEAR_DRIVER_CODE: state => {
+    state.driverCode = ''
+    storage.remove('driverCode')
+  },
+  SET_API: (state, api) => {
+    state.api = api
+    storage.set('api', api)
+  },
+  CLEAR_API: state => {
+    state.api = ''
+    storage.remove('api')
   }
 }
 
 const actions = {
-  setUser({ commit }, user) {
-    commit('SET_USER', user)
+  async login({ dispatch }, params) {
+    let res = await $defaultApi.login(params)
+    await dispatch('successLogin', res.data)
   },
-  clearUser({ commit }) {
-    commit('CLEAR_USER')
+  async autoLogin({ state, commit, dispatch }) {
+    if (state.driverCode && !storage.isOverTime('driverCode')) {
+      let res = await $defaultApi.autoLogin({
+        driver_code: state.driverCode,
+        type: 1
+      })
+      await dispatch('successLogin', res.data)
+    } else {
+      commit('CLEAR_TOKEN')
+    }
   },
-  setToken({ commit }, token) {
-    commit('SET_TOKEN', token)
+  async successLogin({ commit }, res) {
+    commit('SET_USER_INFO', res.customer)
+    commit('SET_TOKEN', res.token)
+    commit('SET_MENUS', res.menus)
+    commit('SET_RULES', res.rules)
+    commit('SET_API', res.api)
+    commit('SET_DRIVER_CODE', res.driver_code)
+    notify(res.message, 'success', 'success.login')
+    await router.push({ path: '/Home' })
   },
-  clearToken({ commit }) {
-    commit('CLEAR_TOKEN')
+  async logout({ state, commit }) {
+    let loading = load('login.exiting')
+    try {
+      await $defaultApi.logout({
+        driver_code: state.driverCode,
+        type: 1
+      })
+      commit('CLEAR_USER_INFO')
+      commit('CLEAR_TOKEN')
+      commit('CLEAR_MENUS')
+      commit('CLEAR_RULES')
+      commit('CLEAR_DRIVER_CODE')
+      commit('CLEAR_API')
+      loading.close()
+      await router.push({ path: '/Login' })
+    } catch (e) {
+      commit('CLEAR_TOKEN')
+      commit('CLEAR_API')
+      loading.close()
+    }
   },
-  setMenu({ commit }, menus) {
-    commit('SET_MENU', menus)
-  },
-  clearMenu({ commit }) {
-    commit('CLEAR_MENU')
-  },
-  setRule({ commit }, rules) {
-    commit('SET_RULE', rules)
-  },
-  clearRule({ commit }) {
-    commit('CLEAR_RULE')
-  },
-  logout({ commit }) {
-    commit('CLEAR_USER')
-    commit('CLEAR_TOKEN')
-    commit('CLEAR_MENU')
-    commit('CLEAR_RULE')
+  hasToken({ state }) {
+    return new Promise((resolve) => {
+      if (state.token.access_token) {
+        resolve(!storage.isOverTime('token'))
+      } else {
+        resolve(false)
+      }
+    })
   }
 }
 

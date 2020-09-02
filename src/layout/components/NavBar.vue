@@ -1,6 +1,7 @@
 <template>
   <div class="nav_bar">
-    <hamburger :is-active="sidebar.opened" @toggleClick="toggleSideBar" class="hamburger-container" id="hamburger-container"/>
+    <hamburger :is-active="sidebar.opened" @toggleClick="toggleSideBar" class="hamburger-container"
+               id="hamburger-container"/>
     <breadcrumb class="breadcrumb-container" id="breadcrumb-container"/>
     <div class="right-menu">
       <div style="float: left;">
@@ -8,7 +9,8 @@
       </div>
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80'" alt="" class="user-avatar">
+          <img :src="'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80'"
+               alt="" class="user-avatar">
           <i class="el-icon-caret-bottom"/>
         </div>
         <el-dropdown-menu slot="dropdown">
@@ -26,18 +28,14 @@
 
 <script>
 import { Dropdown, DropdownItem, DropdownMenu, Tooltip } from 'element-ui'
-
 import { mapGetters } from 'vuex'
-import { load } from '../../global/js/common/message'
-// import { disConnect } from '../../global/js/websocket'
-import { loginPage } from '../../views/login/login'
 
 export default {
   name: 'navBar',
   components: {
-	  Breadcrumb: () => import('../../components/tool/Breadcrumb'),
-	  Hamburger: () => import('../../components/tool/Hamburger'),
-	  [Tooltip.name]: Tooltip,
+    Breadcrumb: () => import('../../components/tool/Breadcrumb'),
+    Hamburger: () => import('../../components/tool/Hamburger'),
+    [Tooltip.name]: Tooltip,
     [Dropdown.name]: Dropdown,
     [DropdownMenu.name]: DropdownMenu,
     [DropdownItem.name]: DropdownItem
@@ -54,19 +52,8 @@ export default {
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
     },
-    logout() {
-      let that = this
-      let user = this.$storage.get('user')
-      let loading = load('login.exiting')
-      this.$apiPost('/User/Logout', { username: user.username, fd: this.socket.fd }).then((res) => {
-        if (res.code === 200) {
-          that.$storage.clear()
-          that.$store.dispatch('user/logout')
-          // disConnect()
-          loginPage()
-          loading.close()
-        }
-      })
+    async logout() {
+      await this.$store.dispatch('user/logout')
     },
     cleanCache() {
       this.$apiPost('/System/CleanCache', {}).then(res => {

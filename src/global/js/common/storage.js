@@ -1,6 +1,6 @@
 import message from './message'
 
-const prefix = 'kgjadmin_'
+const prefix = 'KGJCrm_'
 /**
  * 定时储存前端数据
  * @param k 数据id
@@ -11,8 +11,8 @@ export const set = (k, v, t) => {
   k = prefix + k
   try {
     if (!localStorage) return false
-    let exp = (new Date() - 1) + t * 1000
-    if (t === 0) exp = 0
+    let exp = (new Date().getTime() - 1) + t * 1000
+    if (!t) exp = 0
     let data = { val: v, exp: exp }
     localStorage.setItem(k, JSON.stringify(data))
   } catch (e) {
@@ -56,6 +56,15 @@ export const getExp = (k) => {
 }
 
 /**
+ * 返回缓存的数据是否超时，true为超时，false为不超时
+ * @param { string } k
+ * @returns {Boolean}
+ **/
+export const isOverTime = (k) => {
+  return (new Date().getTime()) > (getExp(k))
+}
+
+/**
  * 移除前端储存的数据
  * @param k 数据id
  * @returns {boolean}
@@ -80,5 +89,6 @@ export default {
   get,
   getExp,
   remove,
-  clear
+  clear,
+  isOverTime
 }

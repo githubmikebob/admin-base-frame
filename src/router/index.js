@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 /* layout */
-import layout from '../layout/layout'
+import Layout from '../layout/Layout'
+import LoginLayout from '../layout/LoginLayout'
 /* Router Modules */
 import customerRouter from './modules/customer'
 
@@ -25,22 +26,30 @@ VueRouter.prototype.push = function push(location) {
 export const baseRoutes = [
   {
     path: '/',
-    name: 'Login',
+    name: 'Login_',
     hidden: true,
-    meta: { title: '登录', icon: 'fas fa-home' },
-    component: () => import(/* webpackChunkName: "about" */ '@/views/login/login.vue')
+    redirect: '/Login',
+    component: LoginLayout,
+    children: [
+      {
+        path: 'Login',
+        name: 'Login',
+        meta: { title: '登录' },
+        component: () => import(/* webpackChunkName: "about" */ '@/views/login/Login.vue')
+      }
+    ]
   },
   {
     path: '/Home',
     name: 'Home_',
     redirect: '/Home',
-    component: layout,
+    component: Layout,
     children: [
       {
         path: '/Home',
         name: 'Home',
         meta: { title: '首页', icon: 'fas fa-home', affix: true },
-        component: () => import(/* webpackChunkName: "about" */ '@/views/home/home.vue')
+        component: () => import(/* webpackChunkName: "about" */ '@/views/home/Home.vue')
       }
     ]
   }
