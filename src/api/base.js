@@ -1,8 +1,7 @@
-import request from '../global/js/common/request'
+import { baseApi } from '@/global/js/common/request'
 
 export function login(params) {
-  request.defaults.baseURL = process.env.VUE_APP_BASE_API
-  return request({
+  return baseApi({
     url: '/Employee/Login',
     method: 'POST',
     data: params
@@ -13,8 +12,7 @@ export function login(params) {
  * @param { driver_code, type } params
  * **/
 export function autoLogin(params) {
-  request.defaults.baseURL = process.env.VUE_APP_BASE_API
-  return request({
+  return baseApi({
     url: '/Employee/AutoLogin',
     method: 'POST',
     data: params
@@ -25,8 +23,7 @@ export function autoLogin(params) {
  * @param { driver_code, type } params
  * **/
 export function logout(params) {
-  request.defaults.baseURL = process.env.VUE_APP_BASE_API
-  return request({
+  return baseApi({
     url: '/Employee/Logout',
     method: 'POST',
     data: params

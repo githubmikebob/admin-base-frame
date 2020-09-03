@@ -1,7 +1,7 @@
 import router from '@/router'
 import storage from '@/global/js/common/storage'
 import { load, notify } from '@/global/js/common/message'
-import * as $defaultApi from '@/api/default'
+import * as $baseApi from '@/api/base'
 
 const state = {
   userInfo: storage.get('userInfo') || { admin: '', id: '', mobile: '', name: '' },
@@ -66,12 +66,12 @@ const mutations = {
 
 const actions = {
   async login({ dispatch }, params) {
-    let res = await $defaultApi.login(params)
+    let res = await $baseApi.login(params)
     await dispatch('successLogin', res.data)
   },
   async autoLogin({ state, commit, dispatch }) {
     if (state.driverCode && !storage.isOverTime('driverCode')) {
-      let res = await $defaultApi.autoLogin({
+      let res = await $baseApi.autoLogin({
         driver_code: state.driverCode,
         type: 1
       })
@@ -93,7 +93,7 @@ const actions = {
   async logout({ state, commit }) {
     let loading = load('login.exiting')
     try {
-      await $defaultApi.logout({
+      await $baseApi.logout({
         driver_code: state.driverCode,
         type: 1
       })
@@ -107,7 +107,6 @@ const actions = {
       await router.push({ path: '/Login' })
     } catch (e) {
       commit('CLEAR_TOKEN')
-      commit('CLEAR_API')
       loading.close()
     }
   },
