@@ -31,7 +31,7 @@ export default {
       width: 50,
       default_column: {
         type: 'index', // 引导效果，没有实际使用
-        name: 'item.sort',
+        name: 'base.sort',
         align: 'center',
         head_align: 'center',
         fixed: 'left',

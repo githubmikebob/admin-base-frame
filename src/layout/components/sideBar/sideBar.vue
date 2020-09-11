@@ -19,12 +19,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import { Menu, Scrollbar } from 'element-ui'
-import sideBarItem from './sideBarItem'
 
 export default {
   name: 'SideBar',
   components: {
-    sideBarItem,
+    SideBarItem: () => import('./SideBarItem'),
     [Menu.name]: Menu,
     [Scrollbar.name]: Scrollbar
   },

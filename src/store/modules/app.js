@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import { get, set } from '../../global/js/common/storage'
 
 const state = {
   device: 'desktop', // 判断终端
@@ -15,7 +16,8 @@ const state = {
   paging: {
     mark: '',
     status: false
-  }
+  },
+  layout: get('layout') || 0
 }
 
 const mutations = {
@@ -59,6 +61,10 @@ const mutations = {
   END_PAGING: (state) => {
     state.paging.mark = ''
     state.paging.status = false
+  },
+  CHANGE_LAYOUT: (state, id) => {
+    state.layout = id
+    set('layout', id)
   }
 }
 
@@ -89,6 +95,10 @@ const actions = {
   },
   endPaging({ commit }) {
     commit('END_PAGING')
+  },
+  changeLayout({ commit }, id) {
+    commit('CHANGE_LAYOUT', id)
+    window.location.reload()
   }
 }
 

@@ -7,6 +7,8 @@ module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? './' : './',
   // outputDir: 在npm run build时 生成文件的目录 type:string, default:'dist'
   outputDir: 'dist',
+  // 静态资源目录(js,css,img,fonts)这些文件都可以写里面
+  assetsDir: 'assets',
   // 构建多页面模式的应用程序.每个“页面”都应该有一个相应的JavaScript条目文件。
   // 该值应该是一个对象，其中键是条目的名称，而该值要么是指定其条目、模板和文件名的对象，要么是指定其条目的字符串，
   // 注意：请保证pages里配置的路径和文件名 在你的文档目录都存在 否则启动服务会报错的

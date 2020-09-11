@@ -58,7 +58,7 @@ export default {
     type: { type: String, default: 'date' },
     width: { type: String, default: '100%' },
     margin_left: { type: String, default: '0' },
-    placeholder: { type: String, default: transform('item.placeholder.time') },
+    placeholder: { type: String, default: transform('base.placeholder.time') },
     clearable: { type: Boolean, default: true },
     show_text: { type: Boolean, default: false },
     text: { type: String, default: 'time.date' }

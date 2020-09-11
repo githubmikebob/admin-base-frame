@@ -1,6 +1,6 @@
 // 获取页面的标题
-import i18n from '../../../i18n'
-import defaultSettings from '../../../settings'
+import i18n from '../../../plugins/i18n'
+import defaultSettings from '../../../plugins/settings'
 
 const title = defaultSettings.title || i18n.t('app.title')
 

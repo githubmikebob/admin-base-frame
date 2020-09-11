@@ -9,7 +9,7 @@ function hasPermission(menus, route) {
   let flag = false
   if (route.name) {
     flag = menus.some(menu => menu === route.name)
-    if (route.children) {
+    if (route.children) { // 主菜单不显示时，判断是否有可用的子集菜单
       route.children.forEach(route => {
         if (menus.some(menu => menu === route.name)) flag = true
       })

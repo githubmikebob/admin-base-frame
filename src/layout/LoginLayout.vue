@@ -1,8 +1,8 @@
 <template>
-  <div :class="key === '/' || key === '/Register' ? 'loginBg' : 'forgetBg'">
-    <div class="return-login" v-if="key !== '/'">
+  <div :class="key === '/Login' || key === '/Register' ? 'loginBg' : 'forgetBg'">
+    <div class="return-login" v-if="key !== '/Login'">
       <el-button icon="el-icon-arrow-left" circle class="return-icon" @click="toLogin"></el-button>
-      <span>{{$transform('button.return_login')}}</span>
+      <span>{{$transform('button.back button.login')}}</span>
     </div>
     <div class="welcome">Hello, Welcome back!</div>
     <div class="logo">
@@ -21,12 +21,13 @@
 <script>
 
 import { Image } from 'element-ui'
+import { LoginFooter } from './components'
 
 export default {
   name: 'loginLayout',
   components: {
     [Image.name]: Image,
-    LoginFooter: () => import('./components/LoginFooter')
+    LoginFooter
   },
   computed: {
     key() {
@@ -36,8 +37,8 @@ export default {
   data() {
     return {
       host: document.domain,
-      default_logo: require('../static/img/login_logo.png'),
-      wj_logo: require('../static/img/logo_title.png')
+      default_logo: require('../assets/img/login_logo.png'),
+      wj_logo: require('../assets/img/logo_title.png')
     }
   },
   methods: {
@@ -109,14 +110,14 @@ export default {
   }
 
   .loginBg {
-    background: url(../static/img/loginBg.jpg) no-repeat center;
+    background: url(../assets/img/loginBg.jpg) no-repeat center;
     height: 40vh;
     @include imgBg;
     @include common;
   }
 
   .forgetBg {
-    background: url(../static/img/forget_bg.png) no-repeat center;
+    background: url(../assets/img/forget_bg.png) no-repeat center;
     height: 24vh;
     @include imgBg;
     @include common;

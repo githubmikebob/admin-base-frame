@@ -50,32 +50,32 @@ export default {
       default_column: {
         align: 'center',
         head_align: 'center',
-        name: 'button.Action',
+        name: 'button.action',
         type: 'action',
         fixed: 'right',
         width: 115,
         index: '',
         editable: [],
         buttons: [{
-          name: 'button.Edit',
+          name: 'button.edit',
           prop: 'api',
           type: 'success',
           edit: false,
           event: 'edit'
         }, {
-          name: 'button.Delete',
+          name: 'button.delete',
           prop: 'api',
           type: 'danger',
           edit: false,
           event: 'remove'
         }, {
-          name: 'button.Confirm',
+          name: 'button.confirm',
           prop: 'api',
           type: 'primary',
           edit: true,
           event: 'confirm'
         }, {
-          name: 'button.Cancel',
+          name: 'button.cancel',
           prop: 'api',
           type: 'warning',
           edit: true,

@@ -12,8 +12,8 @@
         tag="span"
         v-for="tag in visitedViews"
       >
-        {{ tag.title }}
-        <span @click.prevent.stop="closeSelectedTag(tag)" class="el-icon-close" v-if="!isAffix(tag)" />
+        {{ transformMenu(tag.title) }}
+        <span @click.prevent.stop="closeSelectedTag(tag)" class="el-icon-close" v-if="!isAffix(tag)"/>
       </router-link>
     </scroll-pane>
     <ul :style="{left:left+'px',top:top+'px'}" class="contextmenu" v-show="visible">
@@ -26,13 +26,14 @@
 </template>
 
 <script>
-import scrollPane from './scrollPane'
-import { transformMenu } from '../../../locales/i18n/transformMenu'
+import ScrollPane from './ScrollPane'
+import transformMenu from '../../../global/js/mixin/transformMenu'
 import path from 'path'
 
 export default {
   name: 'tabsView',
-  components: { scrollPane },
+  mixins: [transformMenu], // 快捷翻译菜单名称
+  components: { ScrollPane },
   data() {
     return {
       visible: false,
@@ -68,7 +69,6 @@ export default {
     this.addTags()
   },
   methods: {
-    transformMenu, // 快捷翻译菜单名称
     isActive(route) {
       return route.path === this.$route.path
     },

@@ -1,11 +1,11 @@
 <template>
   <el-alert
-    :title="$transform(alert.content)"
+    :title="this.$transform(alert.content)"
     :type="alert.type"
     @close="close"
     center
     show-icon
-    style="margin-bottom: 0.8vh"
+    style="margin-bottom: 0.8vh;"
     v-show="isMark && alert.show"
   />
 </template>

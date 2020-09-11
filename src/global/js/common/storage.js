@@ -84,11 +84,27 @@ export const clear = () => {
   localStorage.clear()
 }
 
+/**
+ * 清除前端储存的除登陆外的所有数据(登陆信息不清除)
+ * @returns {boolean}
+ */
+export const clearData = () => {
+  let login = ['userInfo', 'api', 'rules', 'menus', 'driverCode', 'token', 'layout']
+  login = login.map(item => {
+    return prefix + item
+  })
+  if (!localStorage) return false
+  for (let i in localStorage) {
+    if (localStorage.hasOwnProperty(i) && !login.includes(i)) localStorage.removeItem(i)
+  }
+}
+
 export default {
   set,
   get,
   getExp,
   remove,
   clear,
-  isOverTime
+  isOverTime,
+  clearData
 }

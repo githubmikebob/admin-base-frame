@@ -1,4 +1,4 @@
-import defaultSettings from '../../../src/settings'
+import defaultSettings from '../../plugins/settings'
 
 const { showSettings, tabsView, fixedHeader, sidebarLogo } = defaultSettings
 

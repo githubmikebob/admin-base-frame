@@ -6,13 +6,13 @@
           <el-form-item prop="mobile">
             <el-input v-model="form.mobile" :disabled="requesting" autofocus
                       @keyup.enter.native="login()"
-                      :placeholder="$transform('login.placeholder.account')" class="login-input" maxlength="11">
+                      :placeholder="this.$transform('login.placeholder.mobile')" class="login-input" maxlength="11">
               <i class="el-input__icon el-icon-user" slot="prefix"></i>
             </el-input>
           </el-form-item>
           <el-form-item prop="password">
             <el-input v-model="form.password" :disabled="requesting" @keyup.enter.native="login()"
-                      :placeholder="$transform('login.placeholder.password')" class="login-input" type="password"
+                      :placeholder="this.$transform('login.placeholder.password')" class="login-input" type="password"
                       show-password>
               <i class="el-input__icon fas fa-unlock-alt" slot="prefix"></i>
             </el-input>
@@ -21,7 +21,7 @@
             <el-col :span="18">
               <el-form-item prop="remember">
                 <el-checkbox v-model="form.remember" :disabled="requesting" :true-label="1" :false-label="2"
-                             class="remember">{{$transform('login.placeholder.remember')}}
+                             class="remember">{{$transform('button.remember')}}
                 </el-checkbox>
               </el-form-item>
             </el-col>
@@ -55,13 +55,12 @@ export default {
   mixins: [requesting],
   created() {
     this.$store.dispatch('user/autoLogin')
-    // this.rule = this.$verify('login', this.$deepCopy(this.form))
+    this.rule = this.$verify('login', this.$deepCopy(this.form))
   },
   data() {
     return {
       vm: this,
       url: '/Employee/Login',
-      auto_url: '/Employee/AutoLogin',
       form: {
         mobile: '',
         password: '',
@@ -73,15 +72,14 @@ export default {
     }
   },
   methods: {
-    async login() {
-      await this.$store.dispatch('user/login', this.form)
-    },
-    register() {
-      this.$router.push({ name: 'Register' })
+    login() {
+      this.$refs.form.validate(async (valid) => {
+        if (valid) await this.$store.dispatch('user/login', this.form)
+      })
     },
     forget() {
       this.$router.push({ name: 'Forget' })
-    }
+    },
   }
 }
 </script>

@@ -3,7 +3,7 @@
     <transition-group name="breadcrumb">
       <el-breadcrumb-item :key="index" v-for="(item,index) in levelList">
         <span class="no-redirect" v-if="item.redirect==='noRedirect' || index === levelList.length-1">
-          {{ item.meta.title }}
+          {{ transformMenu(item.meta.title) }}
         </span>
         <a @click.prevent="handleLink(item)" v-else>{{ item.meta.title }}</a>
       </el-breadcrumb-item>
@@ -13,6 +13,7 @@
 
 <script>
 import { Breadcrumb, BreadcrumbItem } from 'element-ui'
+import transformMenu from '../../global/js/mixin/transformMenu'
 
 export default {
   name: 'Breadcrumb',
@@ -20,6 +21,7 @@ export default {
     [Breadcrumb.name]: Breadcrumb,
     [BreadcrumbItem.name]: BreadcrumbItem
   },
+  mixins: [transformMenu],
   data() {
     return {
       levelList: null
@@ -75,9 +77,10 @@ export default {
 
 <style lang="scss" scoped>
   .app-breadcrumb.el-breadcrumb {
-    display: inline-block;
+    height: 100%;
+    display: flex;
+    align-items: center;
     font-size: 14px;
-    line-height: 50px;
     margin-left: 8px;
 
     .no-redirect {

@@ -15,10 +15,6 @@ export function generateScopeValue(row, props) {
       let a = []
       props.map(prop => {
         (generateScopeValue(row, prop) !== '') ? a.push(generateScopeValue(row, prop)) : ''
-        // prop = prop.split('.')[0]
-        // if (row.hasOwnProperty(prop) && row[prop] !== null) {
-        //   a.push(row[prop].name)
-        // }
       })
       value = (a.length > 0) ? deepCopy(a.join(' / ')) : ''
     } else {

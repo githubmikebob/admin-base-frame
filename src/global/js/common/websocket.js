@@ -5,7 +5,7 @@ import { MessageBox } from 'element-ui'
 import { apiPost } from './http'
 import { notify } from './message'
 import { toDecimal } from './data'
-import { generateRoute, home, loginPage, saveRules, saveToken } from '../../../views/login/login'
+import { generateRoute, home, loginPage, saveRules, saveToken } from '../../../views/Login/login'
 import transform from '../function/transform'
 
 const generateIP = () => {
@@ -54,7 +54,7 @@ export const listen = (webSocket) => {
           open(data)
           break
         case 'notify':
-          if (!data.title) data.title = 'title.notify.message'
+          if (!data.title) data.title = 'base.notify.message'
           notify(data.message, data.style, data.title, true)
           break
         case 'progress':
@@ -155,9 +155,9 @@ export const restoreAuth = () => {
  */
 export const kickOnline = () => {
   let message = transform('message.off_line_warn')
-  let title = transform('title.notify.sweet_tip')
+  let title = transform('base.notify.sweet_tip')
   MessageBox.confirm(message, title, {
-    confirmButtonText: transform('button.Confirm'),
+    confirmButtonText: transform('button.confirm'),
     showCancelButton: false,
     closeOnPressEscape: false,
     closeOnClickModal: false,

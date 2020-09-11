@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import LAYOUT from '../global/js/function/changeLayout'
 /* layout */
-import Layout from '../layout/Layout'
 import LoginLayout from '../layout/LoginLayout'
 /* Router Modules */
-import customerRouter from './modules/customer'
+import ExampleRoute from './modules/Example'
+import weChatRoute from './modules/weChat'
 
 Vue.use(VueRouter)
 
@@ -34,8 +35,14 @@ export const baseRoutes = [
       {
         path: 'Login',
         name: 'Login',
-        meta: { title: '登录' },
-        component: () => import(/* webpackChunkName: "about" */ '@/views/login/Login.vue')
+        meta: { title: 'Login' },
+        component: () => import(/* webpackChunkName: "about" */ '@/views/Login/Login.vue')
+      },
+      {
+        path: 'Forget',
+        name: 'Forget',
+        meta: { title: 'Forget' },
+        component: () => import(/* webpackChunkName: "about" */ '@/views/Forget/Forget.vue')
       }
     ]
   },
@@ -43,13 +50,13 @@ export const baseRoutes = [
     path: '/Home',
     name: 'Home_',
     redirect: '/Home',
-    component: Layout,
+    component: LAYOUT,
     children: [
       {
         path: '/Home',
         name: 'Home',
-        meta: { title: '首页', icon: 'fas fa-home', affix: true },
-        component: () => import(/* webpackChunkName: "about" */ '@/views/home/Home.vue')
+        meta: { title: 'Home', icon: 'fas fa-home', affix: true },
+        component: () => import(/* webpackChunkName: "about" */ '@/views/Home/Home.vue')
       }
     ]
   }
@@ -60,7 +67,8 @@ export const baseRoutes = [
  * @type {Array}
  */
 export const asyncRoutes = [
-  customerRouter,
+  ...ExampleRoute,
+  weChatRoute
 ]
 
 const createRouter = () => new VueRouter({
@@ -76,11 +84,5 @@ export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 }
-
-// const router = new VueRouter({
-//   mode: 'history',
-//   base: process.env.BASE_URL,
-//   routes
-// })
 
 export default router

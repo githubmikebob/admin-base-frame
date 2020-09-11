@@ -23,20 +23,22 @@ export const batchNo = () => {
 /**
  * 获取日期格式
  * @param timestamp 时间戳
+ * @param split 分隔符
  * @return {*}
  */
-export const formatDate = (timestamp) => {
+export const formatDate = (timestamp, split = '-') => {
   if (!timestamp) timestamp = new Date().getTime()
   else if (timestamp && isNaN(timestamp)) timestamp = timestamp.replace(/-/g, '/')
   let date = new Date(timestamp)
-  let Y = date.getFullYear() + '-'
-  let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+  let W = getWeek(date.getDay())
+  let Y = date.getFullYear() + split
+  let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + split
   let D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' '
   let h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':'
   let m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
   let s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
   let strDate = Y + M + D + h + m + s
-  return { date: date, time: strDate, Y: Y, M: M, D: D, h: h, m: m, s: s }
+  return { date: date, time: strDate, W: W, Y: Y, M: M, D: D, h: h, m: m, s: s }
 }
 
 export const formatTime = (timestamp) => {
@@ -92,31 +94,8 @@ export const getDay = (timestamp = new Date().getTime()) => {
 }
 
 export const getWeek = (dayOfWeek) => {
-  let day
-  switch (dayOfWeek) {
-    case 0:
-      day = '日'
-      break
-    case 1:
-      day = '一'
-      break
-    case 2:
-      day = '二'
-      break
-    case 3:
-      day = '三'
-      break
-    case 4:
-      day = '四'
-      break
-    case 5:
-      day = '五'
-      break
-    case 6:
-      day = '六'
-      break
-  }
-  return day
+  let dayList = ['sun', 'mon', 'tues', 'wed', 'thur', 'fri', 'sat']
+  return dayList[parseInt(dayOfWeek)]
 }
 
 /**

@@ -8,7 +8,7 @@
       v-show="$te(target)"
       :style="'margin-left:' + margin_left"
   >
-    <el-radio-button :label="-1" v-if="all">{{$t('item.all')}}</el-radio-button>
+    <el-radio-button :label="-1" v-if="all">{{$t('base.all')}}</el-radio-button>
     <el-radio-button :key="index" :label="generateLabel(index)" v-for="(item, index) in pool">
       <span :class="custom_color(index)">{{item}}</span>
     </el-radio-button>

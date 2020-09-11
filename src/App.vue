@@ -11,7 +11,7 @@ export default {
 }
 </script>
 
-<style src="../src/static/fontawesome/css/all.min.css" ></style>
+<style src="../src/assets/fontawesome/css/all.min.css" ></style>
 <style lang="scss" src="../src/global/css/global.scss"></style>
 
 <style>
@@ -21,6 +21,5 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
   }
 </style>

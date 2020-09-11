@@ -3,32 +3,32 @@
     <div class="left"></div>
     <div class="right">
       <div class="phone-wrap">
-        <span class="consultation">{{$transform('app.consultation')}}</span>
+        <span class="consultation">{{$transform('login.consultation')}}</span>
         <div class="phone">
           <i class="phone-icon fas fa-phone fa-rotate-90"></i>
           <span>400-900-3691</span>
         </div>
       </div>
       <div class="link-wrap">
-        <a class="link-text" href="" target="_blank">{{$transform('app.about_link.home')}}</a>
+        <a class="link-text" href="" target="_blank">{{$transform('login.about_link.home')}}</a>
         <span>|</span>
-        <a class="link-text" href="" target="_blank">{{$transform('app.about_link.management_software')}}</a>
+        <a class="link-text" href="" target="_blank">{{$transform('login.about_link.management_software')}}</a>
         <span>|</span>
-        <a class="link-text" href="" target="_blank">{{$transform('app.about_link.wechat_marketing')}}</a>
+        <a class="link-text" href="" target="_blank">{{$transform('login.about_link.weChat_marketing')}}</a>
         <span>|</span>
-        <a class="link-text" href="" target="_blank">{{$transform('app.about_link.jake_mode')}}</a>
+        <a class="link-text" href="" target="_blank">{{$transform('login.about_link.jake_mode')}}</a>
         <span>|</span>
-        <a class="link-text" href="" target="_blank">{{$transform('app.about_link.customer_analysis')}}</a>
+        <a class="link-text" href="" target="_blank">{{$transform('login.about_link.customer_analysis')}}</a>
         <span>|</span>
-        <a class="link-text" href="" target="_blank">{{$transform('app.about_link.shareholder_dividend')}}</a>
+        <a class="link-text" href="" target="_blank">{{$transform('login.about_link.shareholder_dividend')}}</a>
         <span>|</span>
-        <a class="link-text" href="" target="_blank">{{$transform('app.about_link.employee_dividends')}}</a>
+        <a class="link-text" href="" target="_blank">{{$transform('login.about_link.employee_dividends')}}</a>
         <span>|</span>
-        <a class="link-text" href="" target="_blank">{{$transform('app.about_link.phone_guardian')}}</a>
+        <a class="link-text" href="" target="_blank">{{$transform('login.about_link.phone_guardian')}}</a>
         <i class="arrow el-icon-d-arrow-right"></i>
       </div>
       <div class="copyright">
-        <p>{{$transform('app.copyright')}}</p>
+        <p>{{$transform('login.copyright')}}</p>
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@ export default {
 
     .left {
       float: left;
-      background: url(../../static/img/ewm.jpg) no-repeat center;
+      background: url(../../assets/img/ewm.jpg) no-repeat center;
       width: 101px;
       height: 98px;
       margin: 26px 0 0 15vw;

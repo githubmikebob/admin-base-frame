@@ -1,4 +1,4 @@
-import transform from '../function/transform'
+import i18n from '../../../plugins/i18n'
 
 /** ************************************************ 验证函数集合 ************************************************ **/
 
@@ -164,30 +164,34 @@ export const isPassword = (value) => {
 // 生成验证触发方式
 const generateTrigger = (target, field) => {
   let key = target + '.validator.' + field + '.trigger'
-  if (transform(key)) return transform(key)
+  if (i18n.te(key)) return i18n.t(key)
   return 'blur'
 }
 
 // 验证是否必填
 const generateRequired = (target, field) => {
   let key = target + '.validator.' + field + '.required'
-  return !!(transform(key) && transform(key) === 'true')
+  return !!(i18n.te(key) && i18n.t(key) === 'true')
 }
 
 // 生成验证规则
-const generateValidator = (target, field) => {
+const generateValidator = (target, field, self) => {
   let prefix = target + '.validator.' + field
   let verify = target + '.verify.' + field
-  if (transform(prefix)) {
-    let list = transform(prefix)
+  if (i18n.te(prefix)) {
+    let list = i18n.t(prefix)
     let validator
     for (let k in list) {
       if (list.hasOwnProperty(k)) {
         validator = (rule, value, callback) => {
-          if ((!value && transform(prefix + '.required')) && transform(prefix + '.required') === 'true') return callback(new Error(transform(verify + '.required')))
-          if ((value && transform(prefix + '.length_lt')) && value.length <= parseInt(transform(prefix + '.length_lt'))) return callback(new Error(transform(verify + '.length_lt')))
-          if ((value && transform(prefix + '.length_gt')) && value.length > parseInt(transform(prefix + '.length_gt'))) return callback(new Error(transform(verify + '.length_gt')))
-          if ((value && transform(prefix + '.format')) && !(transform(prefix + '.format') + '(value)')) return callback(new Error(transform(verify + '.format')))
+          if ((!value && i18n.te(prefix + '.required')) && i18n.t(prefix + '.required') === 'true') return callback(new Error(i18n.t(verify + '.required')))
+          if ((value && i18n.te(prefix + '.length_lt')) && value.length <= parseInt(i18n.t(prefix + '.length_lt'))) return callback(new Error(i18n.t(verify + '.length_lt')))
+          if ((value && i18n.te(prefix + '.length_gt')) && value.length > parseInt(i18n.t(prefix + '.length_gt'))) return callback(new Error(i18n.t(verify + '.length_gt')))
+          if ((value && i18n.te(prefix + '.format')) && !(i18n.t(prefix + '.format') + '(value)')) return callback(new Error(i18n.t(verify + '.format')))
+          // 密码改变后再次对确认密码进行验证
+          if (value && i18n.te(prefix + '.again')) self.$refs.form.validateField(i18n.t(prefix + '.again'))
+          // 验证确认密码与密码是否一致
+          if (i18n.te(prefix + '.equal') && value !== self.form[i18n.t(prefix + '.equal')]) return callback(new Error(i18n.t(verify + '.equal')))
           callback()
         }
       }
@@ -199,12 +203,13 @@ const generateValidator = (target, field) => {
 }
 
 // 自动生成验证规则
-export default function rules(target, form) {
+export default function rules(target, form, self = '') {
   let rule = {}
   for (let k in form) {
-    if (form.hasOwnProperty(k) && transform(target + '.validator.' + k)) {
+    if (form.hasOwnProperty(k) && i18n.te(target + '.validator.' + k)) {
+      if (target === 'relation_id') console.log(target, k)
       rule[k] = [{
-        validator: generateValidator(target, k),
+        validator: generateValidator(target, k, self),
         trigger: generateTrigger(target, k),
         required: generateRequired(target, k)
       }]

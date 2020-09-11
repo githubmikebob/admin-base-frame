@@ -31,7 +31,8 @@ export default {
   padding: 1vh;
   text-align: left;
   position: relative;
-  overflow: hidden;
+  /*margin-top: 34px;*/
+  /*overflow: hidden;*/
 }
 
 .fixed-header+.app-main {
@@ -46,6 +47,7 @@ export default {
 
   .fixed-header+.app-main {
     padding-top: 30px;
+    margin-top: 60px;
   }
 }
 </style>

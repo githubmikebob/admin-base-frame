@@ -1,39 +1,56 @@
 <template>
   <div :class="classObj" class="app-wrapper">
     <div @click="handleClickOutside" class="drawer-bg" v-if="device === 'mobile' && sidebar.opened"/>
-    <side-bar class="sidebar-container"/>
-    <div :class="{hasTagsView:needTabsView}" class="main-container">
-      <div class="fixed-header">
-        <nav-bar/>
-        <tabs-view v-if="needTabsView"/>
-      </div>
-      <app-main/>
-      <!--      <right-panel v-if="showSettings">-->
-      <!--        <settings />-->
-      <!--      </right-panel>-->
-    </div>
+    <el-container>
+      <el-header>
+        <el-row type="flex" justify="space-between" align="middle">
+          <el-col :span="3">
+            <img src="../assets/img/header_logo.png"/>
+          </el-col>
+          <el-col :span="19">
+            <nav-bar/>
+          </el-col>
+          <el-col :span="2">
+            <app-dropdown></app-dropdown>
+          </el-col>
+        </el-row>
+      </el-header>
+      <el-main>
+        <side-bar class="sidebar-container"/>
+        <div :class="{hasTagsView:needTabsView}" class="main-container">
+          <tabs-view v-if="needTabsView"/>
+          <app-main/>
+        </div>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import { AppMain, NavBar, SideBar, TabsView } from './components'
+import { AppMain, NavBar, SideBar, TabsView, AppDropdown } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
+import { Container, Header, Aside, Main } from 'element-ui'
+
 
 export default {
-  name: 'layout',
+  name: 'Layout',
   components: {
     AppMain,
     SideBar,
     NavBar,
-    TabsView
+    TabsView,
+    AppDropdown,
+    [Container.name]: Container,
+    [Header.name]: Header,
+    [Aside.name]: Aside,
+    [Main.name]: Main,
   },
   mixins: [ResizeMixin],
   computed: {
     ...mapState({
       device: state => state.app.device,
       sidebar: state => state.app.sidebar,
-      showSettings: state => state.settings.showSettings,
       needTabsView: state => state.settings.tabsView,
     }),
     classObj() {
@@ -63,6 +80,26 @@ export default {
     height: 100%
     width: 100%
 
+    .el-header, .el-main
+      padding: 0
+
+      .el-row
+        height: 54px
+        background-color: #304156
+        color: #fff
+
+        .el-col
+          height: 100%
+          overflow: hidden
+
+          &:first-child, &:last-child
+            display: flex
+            align-items: center
+            justify-content: center
+
+          &:last-child
+            padding: 0 15px 0 0
+
     &.mobile.openSidebar
       position: fixed
       top: 0
@@ -76,17 +113,4 @@ export default {
     position: absolute
     z-index: 999
 
-  .fixed-header
-    position: fixed
-    top: 0
-    right: 0
-    z-index: 9
-    width: calc(100% - #{$sideBarWidth})
-    transition: width 0.38s
-
-  .hideSidebar .fixed-header
-    width: calc(100% - 54px)
-
-  .mobile .fixed-header
-    width: 100%
 </style>

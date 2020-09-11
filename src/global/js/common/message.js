@@ -36,7 +36,7 @@ export const load = (text = 'button.loading') => {
  * @param title
  * @param html
  */
-export const notify = (message, type = 'error', title = 'title.notify.operation', html = false) => {
+export const notify = (message, type = 'error', title = 'base.notify.operation', html = false) => {
   if (!html) message = transform(message)
   Notification({
     title: transform(title),
@@ -54,8 +54,8 @@ export const notify = (message, type = 'error', title = 'title.notify.operation'
  * @param message
  * @param title
  */
-export const alertBox = (message, title = 'title.notify.sweet_tip') => {
-  MessageBox.alert(transform(message), transform(title), {
+export const alertBox = async (message, title = 'base.notify.sweet_tip') => {
+  await MessageBox.alert(transform(message), transform(title), {
     confirmButtonText: transform('button.confirm'),
     callback: action => {
     }

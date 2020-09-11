@@ -1,22 +1,22 @@
 <template>
   <el-select
-      v-model="id"
-      :loading="requesting"
-      :disabled="disabled"
-      :filter-method="generateList"
-      :clearable="clearable"
-      @clear="clear"
-      @focus="focus"
-      @change="set()"
-      filterable
-      :placeholder="placeholder"
-      :style="'width: ' + selectWidth + '; margin-left:' + margin_left"
-      :size="global_size"
-      value="">
+    v-model="id"
+    :loading="requesting"
+    :disabled="disabled"
+    :filter-method="generateList"
+    :clearable="clearable"
+    @clear="clear"
+    @focus="focus"
+    @change="set()"
+    filterable
+    :placeholder="placeholder"
+    :style="'width: ' + selectWidth + '; margin-left:' + margin_left"
+    :size="global_size"
+    value="">
     <el-option v-if="show_all" :label="label_all" :value="value_all">
-      <span style="float: left">{{ $t('item.all') }}</span>
+      <span style="float: left">{{ $t('base.all') }}</span>
     </el-option>
-    <el-option v-for="item in list" :key="item.id" :label="item[label]" :value="item.id">
+    <el-option v-for="item in list" :key="item[value]" :label="item[label]" :value="item[value]">
       <template>
         <slot name="option" :scope="item"></slot>
       </template>
@@ -45,7 +45,7 @@ export default {
     clearable: { type: Boolean, default: true },
     placeholder: {
       type: String, default() {
-        return this.$t('search.select')
+        return this.$t('base.search.keyword')
       }
     },
     selectWidth: { type: String, default: '100%' },
@@ -53,11 +53,12 @@ export default {
     show_all: { type: Boolean, default: false }, // 是否显示 全部选项
     label_all: {
       type: String, default() {
-        return this.$t('item.all')
+        return this.$t('base.all')
       }
     },
     value_all: { type: [Number, String], default: -1 },
     label: { type: String, default: 'name' }, // 下拉框展示的值
+    value: { type: String, default: 'id' }, // 下拉框选中的值
   },
   methods: {
     init() {
@@ -71,10 +72,10 @@ export default {
         that.list = deepCopy(data)
       } else {
         keyword = keyword.trim()
-        that.list = data.filter((item) => ((item.name && item.name.indexOf(keyword)) ||
-              (item.letter && item.letter.indexOf(keyword.toUpperCase())) ||
-              (item.spell && item.spell.indexOf(keyword.toLowerCase())) ||
-              (item.short && item.short.indexOf(keyword.toUpperCase()))))
+        that.list = data.filter((item) => ((item.name && item.name.indexOf(keyword) > -1) ||
+						(item.letter && item.letter.indexOf(keyword.toUpperCase()) > -1) ||
+						(item.spell && item.spell.indexOf(keyword.toLowerCase()) > -1) ||
+						(item.short && item.short.indexOf(keyword.toUpperCase()) > -1)))
       }
     },
     set() {

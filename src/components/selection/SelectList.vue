@@ -16,8 +16,8 @@
     :style="'width: ' + selectWidth + '; margin-left:' + margin_left"
     size="mini"
     value="">
-    <el-option v-if="show_all" :label="$t('item.all')" value="-1">
-      <span style="float: left">{{ $t('item.all') }}</span>
+    <el-option v-if="show_all" :label="$t('base.all')" value="-1">
+      <span style="float: left">{{ $t('base.all') }}</span>
     </el-option>
     <el-option v-for="item in list" :key="item.id" :label="item[label]" :value="item[value]">
       <span style="float: left">{{ item[label] }}</span>
@@ -49,7 +49,7 @@ export default {
     limit: { type: Number, default: 0 },
     placeholder: {
       type: String, default() {
-        return this.$t('search.select')
+        return this.$t('base.search.keyword')
       }
     },
     selectWidth: { type: String, default: '100%' },
@@ -58,7 +58,7 @@ export default {
     show_all: { type: Boolean, default: false }, // 是否显示全部的下拉选项
     label_all: {
       type: String, default() {
-        return this.$t('item.all')
+        return this.$t('base.all')
       }
     },
     value_all: { type: String, default: '-1' },

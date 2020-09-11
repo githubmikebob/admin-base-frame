@@ -1,7 +1,7 @@
 import router from '@/router'
 import storage from '@/global/js/common/storage'
 import { load, notify } from '@/global/js/common/message'
-import * as $baseApi from '@/api/base'
+import * as $adminApi from '../../api/admin'
 
 const state = {
   userInfo: storage.get('userInfo') || { admin: '', id: '', mobile: '', name: '' },
@@ -66,34 +66,35 @@ const mutations = {
 
 const actions = {
   async login({ dispatch }, params) {
-    let res = await $baseApi.login(params)
-    await dispatch('successLogin', res.data)
+    let res = await $adminApi.login(params)
+    await dispatch('successLogin', res)
   },
   async autoLogin({ state, commit, dispatch }) {
     if (state.driverCode && !storage.isOverTime('driverCode')) {
-      let res = await $baseApi.autoLogin({
+      let res = await $adminApi.autoLogin({
         driver_code: state.driverCode,
         type: 1
       })
-      await dispatch('successLogin', res.data)
+      await dispatch('successLogin', res)
     } else {
       commit('CLEAR_TOKEN')
     }
   },
   async successLogin({ commit }, res) {
-    commit('SET_USER_INFO', res.customer)
-    commit('SET_TOKEN', res.token)
-    commit('SET_MENUS', res.menus)
-    commit('SET_RULES', res.rules)
-    commit('SET_API', res.api)
-    commit('SET_DRIVER_CODE', res.driver_code)
-    notify(res.message, 'success', 'success.login')
+    commit('SET_USER_INFO', res.data.customer)
+    commit('SET_TOKEN', res.data.token)
+    commit('SET_MENUS', res.data.menus)
+    commit('SET_RULES', res.data.rules)
+    commit('SET_API', res.data.api)
+    commit('SET_DRIVER_CODE', res.data.driver_code)
     await router.push({ path: '/Home' })
+    console.log(res)
+    notify(res.data.message, res.status)
   },
   async logout({ state, commit }) {
     let loading = load('login.exiting')
     try {
-      await $baseApi.logout({
+      let res = await $adminApi.logout({
         driver_code: state.driverCode,
         type: 1
       })
@@ -105,6 +106,7 @@ const actions = {
       commit('CLEAR_API')
       loading.close()
       await router.push({ path: '/Login' })
+      notify(res.message, res.status)
     } catch (e) {
       commit('CLEAR_TOKEN')
       loading.close()

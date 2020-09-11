@@ -60,7 +60,7 @@ export default {
         style: '',
         width: '',
         prop: '',
-        placeholder: 'item.value'
+        placeholder: 'base.content'
       }
     }
   },

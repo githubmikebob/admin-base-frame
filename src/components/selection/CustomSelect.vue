@@ -45,12 +45,12 @@ export default {
     clearable: { type: Boolean, default: true },
     multiple: { type: Boolean, default: false },
     limit: { type: Number, default: 0 },
-    placeholder: { type: String, default() { return this.$t('search.select') } },
+    placeholder: { type: String, default() { return this.$t('base.search.keyword') } },
     selectWidth: { type: String, default: '100%' },
     margin_left: { type: String, default: '0' },
     price: { type: Boolean, default: false },
     show_all: { type: Boolean, default: false }, // 是否显示全部的下拉选项
-    label_all: { type: String, default() { return this.$t('item.all') } },
+    label_all: { type: String, default() { return this.$t('base.all') } },
     value_all: { type: String, default: '-1' },
     collapseTags: { type: Boolean, default: false },
     label: { type: String, default: 'name' }
