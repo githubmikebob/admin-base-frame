@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'submitButton',
+  name: 'SubmitButton',
   computed: {
     size() {
       return this.$store.state.app.size

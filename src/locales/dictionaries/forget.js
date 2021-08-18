@@ -1,24 +1,27 @@
 import $base, { equalRule } from './base'
 import extend from '@/global/js/function/extend'
 
-/**
- * 字段
- * @type {{}}
- */
+// 生成基础语言包
+export function generateFields() {
+  let base = $base.generateBaseFields(['status', 'remark', 'created_at', 'updated_at'])
+  let forget = {
+    mobile: '手机号码',
+    code: '验证码',
+    password: '新密码',
+    password_confirmation: '新密码二次确认'
+  }
+  return extend(base, forget)
+}
+
 export const fields = generateFields()
 
-/**
- * Placeholder
- * @type {{}}
- */
+// 生成Placeholder
 let inputList = ['mobile', 'code', 'password', 'password_confirmation']
 export const placeholder = $base.generatePlaceholders(fields, inputList)
 
 export const verify = generateVerify()
 
-/**
- * 前端验证规则
- */
+// 前端验证规则
 export const validator = {
   mobile: {
     required: 'true',
@@ -43,41 +46,13 @@ export const validator = {
   }
 }
 
+export function generateError() {
+  return {}
+}
+
 export const error = generateError()
 
-/**
- * 语言包
- */
-export const locales = generateLocales()
-
-/**
- * 生成语言包
- */
-export function generateLocales() {
-  let forget = generateFields()
-  forget.placeholder = placeholder
-  forget.validator = validator
-  forget.verify = verify
-  return forget
-}
-
-/**
- * 生成语言包
- */
-export function generateFields() {
-  let base = $base.generateBaseFields(['status', 'remark', 'created_at', 'updated_at'])
-  let forget = {
-    mobile: '手机号码',
-    code: '验证码',
-    password: '新密码',
-    password_confirmation: '新密码二次确认'
-  }
-  return extend(base, forget)
-}
-
-/**
- * 生成验证规则
- */
+// 生成验证规则
 export function generateVerify() {
   return {
     mobile: {
@@ -103,9 +78,16 @@ export function generateVerify() {
   }
 }
 
-export function generateError() {
-  return {}
+// 生成最终语言包
+export function generateLocales() {
+  let forget = generateFields()
+  forget.placeholder = placeholder
+  forget.validator = validator
+  forget.verify = verify
+  return forget
 }
+
+export const locales = generateLocales()
 
 export default {
   fields,

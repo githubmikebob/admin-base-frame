@@ -1,22 +1,5 @@
 import extend from '../../global/js/function/extend'
 
-/**
- * 通用字段
- */
-export const fields = generateFields()
-
-/**
- * placeholder
- */
-let inputList = ['content']
-let selectList = ['time']
-export const placeholder = generatePlaceholders(fields, inputList, selectList)
-
-/**
- * 语言包
- */
-export const locales = generateLocales()
-
 export function generateFields() {
   let base = {
     type: '类型',
@@ -36,13 +19,10 @@ export function generateFields() {
     remark: '备注',
     created_at: '创建时间',
     updated_at: '更新时间',
-    action: '操作'
-  }
-  let search = {
-    search: {
-      keyword: '关键词 搜索',
-      common: '按 名称、首字母、简拼、全拼 进行搜索'
-    }
+    action: '操作',
+    more: '更多',
+    search: '搜索',
+    screen: '筛选'
   }
   let title = {
     notify: {
@@ -65,8 +45,15 @@ export function generateFields() {
     fri: '星期五',
     sat: '星期六'
   }
-  return extend(base, search, title, item, week)
+  return extend(base, title, item, week)
 }
+
+export function generateBaseRules() {
+
+}
+
+// 初始通用字段
+export const fields = generateFields()
 
 /**
  * 生成需要的基础词典
@@ -92,17 +79,6 @@ export function generatePlaceholders(fields, iL = [], sL = []) {
     else if (fields.hasOwnProperty(k) && sL.indexOf(k) > -1) placeholder[k] = '请选择' + fields[k]
   }
   return placeholder
-}
-
-/**
- * 生成语言包
- */
-export function generateLocales() {
-  let base = generateFields()
-  base.placeholder = placeholder
-  // menu.validator = validator
-  // menu.verify = verify
-  return base
 }
 
 /**
@@ -177,9 +153,22 @@ export const equalRule = (fieldF, fieldS, type = 1) => {
   }
 }
 
-export function generateBaseRules() {
+// 生成placeholder
+let inputList = ['content']
+let selectList = ['time']
+export const placeholder = generatePlaceholders(fields, inputList, selectList)
 
+// 生成最终语言包
+export function generateLocales() {
+  let base = generateFields()
+  base.placeholder = placeholder
+  // base.validator = validator
+  // base.verify = verify
+  return base
 }
+
+export const locales = generateLocales()
+
 
 export default {
   locales,

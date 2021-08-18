@@ -1,12 +1,12 @@
 <template>
   <el-button :size="size" @click="search" class="search-button" plain type="default">
-    <i class="fas fa-search search-icon" style="color: #2EBAAE"></i>{{$t('button.search')}}
+    <i class="fas fa-search search-icon" />{{ $t('button.search') }}
   </el-button>
 </template>
 
 <script>
 export default {
-  name: 'searchButton',
+  name: 'SearchButton',
   computed: {
     size() {
       return this.$store.state.app.size
@@ -25,6 +25,7 @@ export default {
     margin-left: 8px;
   }
   .search-icon {
+    color: #2EBAAE;
     margin-right: 3px;
   }
 </style>

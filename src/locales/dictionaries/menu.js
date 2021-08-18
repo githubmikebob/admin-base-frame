@@ -50,12 +50,36 @@ export function generateFields() {
     show: '是否显示',
     rules: '拥有权限'
   }
-  let menu = {
+  let menus = {
     Login: '登录',
     Home: '首页',
-    Forget: '忘记密码'
+    Forget: '忘记密码',
+    Cashier: '收银台',
+    SaleTable: '桌台开单',
+    SaleQuickly: '快餐开单',
+    Reservation: '预约管理',
+    Deposit: '寄存管理',
+    SaleAuth: '权限设置',
+    StoreManage: '库存管理',
+    OutGoing: '出库管理',
+    Purchase: '入库管理',
+    ProTransfer: '调拨管理',
+    ProCheck: '库存盘点',
+    ProCount: '库存统计',
+    StoreSet: '基础设置',
+    StoreTool: '库存配置',
+    StoreAuth: '权限设置',
+    WeChat: '微信管理',
+    Fans: '粉丝列表',
+    WeChatAuth: '权限管理',
   }
-  return extend(base, setUp, menu)
+  let tabs = {
+    Material: '物品',
+    MaterialCategory: '物品类型',
+    Provider: '供应商',
+    Store: '仓库'
+  }
+  return extend(base, setUp, menus, tabs)
 }
 
 /**

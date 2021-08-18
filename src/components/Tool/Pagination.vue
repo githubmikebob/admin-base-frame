@@ -5,7 +5,7 @@
     :current-page="page"
     :layout="layout[layout_type]"
     :page-size="size"
-    :page-sizes="generateSizes()"
+    :page-sizes="generateSizes"
     :pager-count="paginationCount"
     :small="smallPagination"
     :total="total"
@@ -28,7 +28,10 @@ export default {
       let paging = this.$store.state.app.paging
       if (paging.mark === this.mark) return paging.status
       else return false
-    }
+    },
+    generateSizes() {
+      return [this.size].concat(this.paginationSizes)
+    },
   },
   data() {
     return {
@@ -61,9 +64,6 @@ export default {
     total: { required: true, type: Number, default: 0 }
   },
   methods: {
-    generateSizes() {
-      return [this.size].concat(this.paginationSizes)
-    },
     sizeChange(size) {
       this.$emit('update:size', size)
     },

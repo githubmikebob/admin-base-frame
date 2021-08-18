@@ -1,6 +1,5 @@
 <script>
 import columnTemplate from '../EditColumns/columns'
-import autoTableHeight from '../../global/js/function/autoTableHeight'
 
 export default {
   name: 'editTable',
@@ -17,7 +16,7 @@ export default {
       let rowHeight = this.$deepCopy(this.rowHeight)
       let tabHeight = this.$deepCopy(this.tabHeight)
       let size = this.$deepCopy(this.paginationSize)
-      return autoTableHeight(size, headHeight, rowHeight, tabHeight)
+      return this.$autoTableHeight(size, headHeight, rowHeight, tabHeight)
     }
   },
   props: {

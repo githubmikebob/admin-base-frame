@@ -1,4 +1,4 @@
-import IndexColumn from '../columns/IndexColumn'
+import IndexColumn from '../Columns/IndexColumn'
 import TextColumn from './TextColumn'
 import AutoTextColumn from './AutoTextColumn'
 import ActionColumn from './ActionColumn'

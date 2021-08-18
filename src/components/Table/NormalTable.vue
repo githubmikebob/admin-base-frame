@@ -1,23 +1,10 @@
 <script>
-import columnTemplate from '../columns/columns'
-import autoTableHeight from '../../global/js/function/autoTableHeight'
+import columnTemplate from '../Columns/columns'
 import global_size from '../../global/js/mixin/global_size'
 
 export default {
   name: 'NormalTable',
   mixins: [global_size],
-  data() {
-    return {}
-  },
-  computed: {
-    listHeight() {
-      let headHeight = this.$deepCopy(this.headHeight)
-      let rowHeight = this.$deepCopy(this.rowHeight)
-      let tabHeight = this.$deepCopy(this.tabHeight)
-      let size = this.$deepCopy(this.paginationSize)
-      return autoTableHeight(size, headHeight, rowHeight, tabHeight)
-    }
-  },
   props: {
     table: { type: Boolean, default: false },
     stripe: { type: Boolean, default: true },
@@ -27,6 +14,7 @@ export default {
     headHeight: { type: Number, default: 37 },
     rowHeight: { type: Number, default: 37 },
     tabHeight: { type: Number, default: 0 }, // tab切换的高度
+    sumHeight: { type: Number, default: 0 }, // 合计的高度
     paginationSize: { type: Number, default: 0 },
     page: { type: Number, default: 1 }, // 页数
     size: { type: Number, default: 15 }, // 页面大小
@@ -45,6 +33,21 @@ export default {
     },
     localSearch: { type: Boolean, default: false }
   },
+  data() {
+    return {}
+  },
+  computed: {
+    listHeight() {
+      let headHeight = this.$deepCopy(this.headHeight)
+      let rowHeight = this.$deepCopy(this.rowHeight)
+      let tabHeight = this.$deepCopy(this.tabHeight)
+      let sumHeight = this.$deepCopy(this.sumHeight)
+      let size = this.$deepCopy(this.paginationSize)
+      return this.$autoTableHeight(size, headHeight, rowHeight, tabHeight, 2, sumHeight)
+    }
+  },
+  mounted() {
+  },
   methods: {
     actions(type, row) {
       this.$emit('actions', type, row)
@@ -59,7 +62,7 @@ export default {
           option = { props: { prop_column: v }}
           break
         case 'index':
-          option = { props: { prop_column: v, page: this.page, size: this.size }}
+          option = { props: { prop_column: v, page: this.page, size: this.paginationSize }}
           break
         case 'action':
         case 'switch':

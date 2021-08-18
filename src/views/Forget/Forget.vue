@@ -56,7 +56,7 @@ import {getCode, retrieve, loginNow} from './forget'
 export default {
   name: 'forget',
   components: {
-    Alert: () => import('../../components/tool/Alert')
+    Alert: () => import('../../components/Tool/Alert')
   },
   mixins: [requesting],
   created() {

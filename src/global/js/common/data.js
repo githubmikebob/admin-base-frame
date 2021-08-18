@@ -26,9 +26,22 @@ export const setField = (form, data, need) => {
  */
 export const clearField = (form, need) => {
   if (!need) need = deepCopy(form)
-  let k
-  for (k in need) {
+  for (let k in need) {
     if (need.hasOwnProperty(k)) form[k] = ''
+  }
+  return form
+}
+
+/**
+ * 删除字段
+ * @param form
+ * @param need
+ * @returns {*}
+ */
+export const delField = (form, need) => {
+  if (!need) need = deepCopy(form)
+  for (let k in need) {
+    if (need.hasOwnProperty(k) && need[k] === null) delete form[k]
   }
   return form
 }
@@ -95,6 +108,7 @@ export const isNumber = (number) => {
 export default {
   setField,
   clearField,
+  delField,
   firstObj,
   toDecimal,
   isExternal,

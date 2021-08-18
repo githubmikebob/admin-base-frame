@@ -5,7 +5,7 @@
 </template>
 
 <script type='text/ecmascript-6'>
-import BaseDropdown from '../../../components/tool/BaseDropdown'
+import BaseDropdown from '../../../components/Tool/BaseDropdown'
 import { mapState } from 'vuex'
 import { getCleanCache } from '../../../api/system'
 

@@ -1,15 +1,17 @@
 import Vue from 'vue'
 
-import OpenButton from './tool/OpenButton'
-import RefreshButton from './tool/RefreshButton'
-import SearchInput from './tool/SearchInput'
-import SearchButton from './tool/SearchButton'
-import Pagination from './tool/Pagination'
-import Alert from './tool/Alert'
+import NormalForm from './Form/NormalForm'
+import SearchForm from './Form/SearchForm'
+import OpenButton from './Button/OpenButton'
+import RefreshButton from './Button/RefreshButton'
 
+import Pagination from './Tool/Pagination'
+import Alert from './Tool/Alert'
+
+Vue.component('NormalForm', NormalForm)
+Vue.component('SearchForm', SearchForm)
 Vue.component('OpenButton', OpenButton)
 Vue.component('RefreshButton', RefreshButton)
-Vue.component('SearchInput', SearchInput)
-Vue.component('SearchButton', SearchButton)
+
 Vue.component('Pagination', Pagination)
 Vue.component('Alert', Alert)

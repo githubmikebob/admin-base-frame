@@ -1,58 +1,7 @@
 import $base from './base'
 import extend from '../../global/js/function/extend'
 
-/**
- * 字段
- * @type {{}}
- */
-export const fields = generateFields()
-
-/**
- * Placeholder
- * @type {{}}
- */
-let inputList = ['mobile', 'password']
-export const placeholder = $base.generatePlaceholders(fields, inputList)
-
-export const verify = generateVerify()
-
-/**
- * 前端验证规则
- */
-export const validator = {
-  mobile: {
-    required: 'true',
-    format: 'isPhone',
-  },
-  password: {
-    required: 'true',
-    length_lt: '5',
-    length_gt: '13',
-    format: 'isPassword',
-  },
-}
-
-export const error = generateError()
-
-/**
- * 语言包
- */
-export const locales = generateLocales()
-
-/**
- * 生成语言包
- */
-export function generateLocales() {
-  let login = generateFields()
-  login.placeholder = placeholder
-  login.validator = validator
-  login.verify = verify
-  return login
-}
-
-/**
- * 生成语言包
- */
+// 生成基础语言包
 export function generateFields() {
   let base = $base.generateBaseFields(['status', 'remark', 'created_at', 'updated_at'])
   let login = {
@@ -78,9 +27,27 @@ export function generateFields() {
   return extend(base, login, app)
 }
 
-/**
- * 生成验证规则
- */
+export const fields = generateFields()
+
+// 生成Placeholder
+let inputList = ['mobile', 'password']
+export const placeholder = $base.generatePlaceholders(fields, inputList)
+
+// 前端验证规则
+export const validator = {
+  mobile: {
+    required: 'true',
+    format: 'isPhone',
+  },
+  password: {
+    required: 'true',
+    length_lt: '5',
+    length_gt: '13',
+    format: 'isPassword',
+  },
+}
+
+// 生成验证规则
 export function generateVerify() {
   return {
     mobile: {
@@ -96,9 +63,24 @@ export function generateVerify() {
   }
 }
 
+export const verify = generateVerify()
+
 export function generateError() {
   return {}
 }
+
+export const error = generateError()
+
+// 生成最终语言包
+export function generateLocales() {
+  let login = generateFields()
+  login.placeholder = placeholder
+  login.validator = validator
+  login.verify = verify
+  return login
+}
+
+export const locales = generateLocales()
 
 export default {
   fields,

@@ -1,5 +1,5 @@
 import path from 'path'
-import AppLink from '../../components/tool/AppLink'
+import AppLink from '../../components/Tool/AppLink'
 import { MenuItem, Submenu } from 'element-ui'
 import { isExternal } from '../../global/js/common/data'
 import transformMenu from '../../global/js/mixin/transformMenu'

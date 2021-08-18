@@ -14,9 +14,9 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'navBar',
   components: {
-    Breadcrumb: () => import('../../../components/tool/Breadcrumb'),
-    Hamburger: () => import('../../../components/tool/Hamburger'),
-	  DigitalClock: () => import('../../../components/tool/DigitalClock'),
+    Breadcrumb: () => import('../../../components/Tool/Breadcrumb'),
+    Hamburger: () => import('../../../components/Tool/Hamburger'),
+	  DigitalClock: () => import('../../../components/Tool/DigitalClock'),
     [Dropdown.name]: Dropdown,
     [DropdownMenu.name]: DropdownMenu,
     [DropdownItem.name]: DropdownItem
